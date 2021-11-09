@@ -1,30 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { Hidden, Grid, Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
+import LandingComponent from "./components/LandingComponent";
 
 function App() {
   return (
     <React.Fragment key="App">
       <StyledGrid container spacing={3}>
-        <Hidden only="xs">
-          <StyledGrid item sm={1} md={3}>
-            <Paper>GUTTER</Paper>
-          </StyledGrid>
-        </Hidden>
-        <StyledGrid item xs={12} sm={10} md={6}>
-          <Paper className="Content"> Here goes the content</Paper>
+        <StyledGrid item xs={12} sm={10} md={8} lg={6}>
+          <Paper className="Content" elevation={1}>
+            <LandingComponent />
+          </Paper>
         </StyledGrid>
-        <Hidden only="xs">
-          <StyledGrid item sm={1} md={3}>
-            <Paper>GUTTER</Paper>
-          </StyledGrid>
-        </Hidden>
       </StyledGrid>
     </React.Fragment>
   );
 }
 
 const StyledGrid = styled(Grid)`
+  justify-content: center;
   text-align: center;
 `;
 export default App;
