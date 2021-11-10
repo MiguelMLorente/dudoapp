@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Paper } from "@mui/material";
-import LandingComponent from "./components/LandingComponent";
+import GlobalStyle from "./globalStyles";
+import { Grid } from "@mui/material";
+// import RoomJoinComponent from "./components/roomJoinComponent";
+import NewRoomComponent from "./components/newRoomComponent";
 
 function App() {
   return (
     <React.Fragment key="App">
-      <StyledGrid container spacing={3}>
+      <GlobalStyle />
+      <StyledGrid container>
         <StyledGrid item xs={12} sm={10} md={8} lg={6}>
-          <Paper className="Content" elevation={1}>
-            <LandingComponent />
-          </Paper>
+          <NewRoomComponent />
         </StyledGrid>
       </StyledGrid>
     </React.Fragment>
