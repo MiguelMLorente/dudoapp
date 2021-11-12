@@ -3,7 +3,8 @@ import styled from "styled-components";
 import GlobalStyle from "./globalStyles";
 import { Grid } from "@mui/material";
 // import RoomJoinComponent from "./components/roomJoinComponent";
-import NewRoomComponent from "./components/newRoomComponent";
+// import NewRoomComponent from "./components/newRoomComponent";
+import LobbyComponent from "./components/LobbyComponent";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <GlobalStyle />
       <StyledGrid container>
         <StyledGrid item xs={12} sm={10} md={8} lg={6}>
-          <NewRoomComponent />
+          <LobbyComponent />
         </StyledGrid>
       </StyledGrid>
     </React.Fragment>
