@@ -17,6 +17,9 @@ export function valueToDiceIcon(value) {
     5: faDiceFive,
     6: faDiceSix,
   };
-
-  return <FontAwesomeIcon icon={diceIconMap[value]} />;
+  if (value in diceIconMap) {
+    return <FontAwesomeIcon icon={diceIconMap[value]} />;
+  } else {
+    return;
+  }
 }
