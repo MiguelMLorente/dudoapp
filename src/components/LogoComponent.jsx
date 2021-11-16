@@ -25,7 +25,6 @@ function LogoComponent(props) {
 
 const StyledLogo = styled.div`
   font-family: "Amatic SC";
-  font-size: 5rem;
   .big-logo {
     font-size: 5rem;
     padding: 2rem 5rem;
