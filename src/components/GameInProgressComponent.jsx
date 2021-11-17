@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Button, Grid, Paper, Typography, Divider } from "@mui/material";
 import LogoComponent from "./LogoComponent";
-import BidDisplayComponent from "./BidDisplayComponent";
-import DiceDisplayComponent from "./DiceDisplayComponent";
+import BidDisplayComponent from "./InGameComponents/BidDisplayComponent";
+import DiceDisplayComponent from "./InGameComponents/DiceDisplayComponent";
+import DiceSelector from "./InGameComponents/DiceSelector";
 
 function GameInProgressComponent() {
   return (
@@ -52,7 +53,9 @@ function GameInProgressComponent() {
                         <Grid item>
                           <Button variant="outlined">Bid</Button>
                         </Grid>
-                        <Grid item>CAROSUEL</Grid>
+                        <Grid item>
+                          <DiceSelector />
+                        </Grid>
                       </Grid>
                       <Grid
                         container

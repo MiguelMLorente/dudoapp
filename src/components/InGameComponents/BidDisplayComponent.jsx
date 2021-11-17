@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Paper } from "@mui/material";
 import { styled } from "@mui/system";
-import { valueToDiceIcon } from "../utils";
+import { valueToDiceIcon } from "./utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 

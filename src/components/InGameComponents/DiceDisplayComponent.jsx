@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Paper } from "@mui/material";
 import styled from "styled-components";
 import { v4 as uuid4 } from "uuid";
-import { valueToDiceIcon } from "../utils";
+import { valueToDiceIcon } from "./utils";
 
 function DiceDisplayComponent(props) {
   let variantClassName = "";
