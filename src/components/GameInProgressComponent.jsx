@@ -10,7 +10,7 @@ function GameInProgressComponent() {
   return (
     <React.Fragment>
       <StyledContainer>
-        <StyledGrid container>
+        <Grid container justifyContent="center">
           <Grid item s={12} sm={10} md={8} lg={6}>
             <StyledPaper elevation={1}>
               <LogoComponent variant="small" />
@@ -50,9 +50,9 @@ function GameInProgressComponent() {
                   <StyledPaper elevation={3}>
                     <Grid container justifyContent="center">
                       <Grid container item justifyContent="space-around">
-                        <Grid item>
+                        <StyledButtonGrid item>
                           <Button variant="outlined">Bid</Button>
-                        </Grid>
+                        </StyledButtonGrid>
                         <Grid item>
                           <DiceSelector />
                         </Grid>
@@ -79,7 +79,7 @@ function GameInProgressComponent() {
               </Grid>
             </StyledPaper>
           </Grid>
-        </StyledGrid>
+        </Grid>
       </StyledContainer>
     </React.Fragment>
   );
@@ -94,7 +94,7 @@ const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;
 `;
-const StyledGrid = styled(Grid)`
-  justify-content: center;
+const StyledButtonGrid = styled(Grid)`
+  padding-top: 1.6rem;
 `;
 export default GameInProgressComponent;
