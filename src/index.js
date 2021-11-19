@@ -4,12 +4,23 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CssBaseline } from "@mui/material";
+//Redux setup
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers";
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <CssBaseline>
-      <App />
-    </CssBaseline>
+    <Provider store={store}>
+      <CssBaseline>
+        <App />
+      </CssBaseline>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
