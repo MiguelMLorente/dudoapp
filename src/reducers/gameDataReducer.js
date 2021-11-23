@@ -4,7 +4,7 @@ function userNameProvider() {
 }
 
 const initState = {
-  userUuid: "",
+  userId: "",
   name: userNameProvider(),
   gameName: "",
   gamePassword: "",
@@ -14,12 +14,14 @@ const initState = {
 };
 
 const gameDataReducer = (state = initState, action) => {
+  console.log("Reducer fired with action: ");
+  console.log(action);
+  let payload = action.payload;
   switch (action.type) {
     default:
       return { ...state };
-    case "FETCH_GAME_DATA":
-      //Try to get into a game
-      return { ...state };
+    case "UPDATE_USER_ID":
+      return { ...state, userId: payload.userId };
   }
 };
 

@@ -9,6 +9,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import thunk from "redux-thunk";
+import WebSocketProvider from "./WebSocket";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -19,9 +20,11 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <CssBaseline>
-        <App />
-      </CssBaseline>
+      <WebSocketProvider>
+        <CssBaseline>
+          <App />
+        </CssBaseline>
+      </WebSocketProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
