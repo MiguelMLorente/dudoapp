@@ -1,11 +1,6 @@
-function userNameProvider() {
-  // TODO: Implement random name provider ( Adjective + Animal )
-  return "SillyName";
-}
-
 const initState = {
   userId: "",
-  name: userNameProvider(),
+  name: "",
   gameName: "",
   gamePassword: "",
   userIsReady: false,
@@ -22,6 +17,15 @@ const gameDataReducer = (state = initState, action) => {
       return { ...state };
     case "UPDATE_USER_ID":
       return { ...state, userId: payload.userId };
+    case "UPDATE_USERNAME":
+      return { ...state, name: payload };
+    case "UPDATE_GAME_DATA":
+      return {
+        ...state,
+        gameName: payload.gameShortId,
+        gameId: payload.gameId,
+        playerList: payload.playerList,
+      };
   }
 };
 

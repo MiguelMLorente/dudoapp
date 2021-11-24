@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import io from "socket.io-client";
 import { useDispatch } from "react-redux";
-import { updateUserID } from "./actions/gameDataActions";
+import { updateGameData, updateUserID } from "./actions/gameDataActions";
 
 const WebSocketContext = createContext(null);
 
@@ -13,15 +13,43 @@ const WebSocketProvider = ({ children }) => {
 
   const dispatch = useDispatch();
 
+  const sendJoinRequest = (
+    userId,
+    userName,
+    requestedGameName,
+    requestedGamePassword
+  ) => {
+    const payload = {
+      requester: {
+        uuid: userId,
+        name: userName,
+      },
+      actionType: "JOIN GAME",
+      actionData: {
+        gameShortId: requestedGameName,
+        gamePassword: requestedGamePassword,
+      },
+    };
+    socket.emit("action", payload);
+    // dispatch(updateGameID(payload));
+  };
+
   if (!socket) {
     socket = io("ws://localhost:8081");
 
     socket.on("new-user", (data) => {
       dispatch(updateUserID(data));
     });
+    socket.on("joined-game", (data) => {
+      dispatch(updateGameData(data));
+    });
+    socket.on("error", (error) => {
+      console.log(error);
+    });
 
     ws = {
       socket: socket,
+      sendJoinRequest,
     };
   }
   return (

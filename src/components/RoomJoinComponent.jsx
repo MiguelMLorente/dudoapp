@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { TextField, Grid, Button, Paper } from "@mui/material";
 import LogoComponent from "./LogoComponent";
+import sillyNameGenerator from "../userNameUtils";
+import { useDispatch, useSelector } from "react-redux";
+import { WebSocketContext } from "../WebSocket";
+import { updateUserName } from "../actions/gameDataActions";
 
-function roomJoinComponent() {
+function RoomJoinComponent() {
+  const ws = useContext(WebSocketContext);
+  const uuid = useSelector((state) => state.gameData.userId);
+  const dispatch = useDispatch();
+  let [userName, setUserName] = useState(sillyNameGenerator());
+  let [roomID, setRoomID] = useState("");
+  let [roomPassword, setRoomPassword] = useState("");
+
+  const userNameHandler = (e) => {
+    setUserName(e.target.value);
+  };
+  const roomIDHandler = (e) => {
+    setRoomID(e.target.value);
+  };
+  const joinRoomHandler = (e) => {
+    dispatch(updateUserName(userName));
+    ws.sendJoinRequest(uuid, userName, roomID, roomPassword);
+  };
   return (
     <React.Fragment>
       <StyledContainer>
@@ -22,18 +43,24 @@ function roomJoinComponent() {
                   <TextField
                     id="nameInput"
                     label="Username"
-                    defaultValue="FancyPlatypus"
+                    value={userName}
+                    onChange={userNameHandler}
                   />
                 </Grid>
                 <Grid item>
                   <TextField
                     id="roomInput"
                     label="RoomID: "
-                    defaultValue="123456"
+                    value={roomID}
+                    onChange={roomIDHandler}
                   />
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" fullWidth={true}>
+                  <Button
+                    variant="contained"
+                    fullWidth={true}
+                    onClick={joinRoomHandler}
+                  >
                     Join Room
                   </Button>
                 </Grid>
@@ -61,4 +88,4 @@ const StyledGrid = styled(Grid)`
   justify-content: center;
 `;
 
-export default roomJoinComponent;
+export default RoomJoinComponent;
