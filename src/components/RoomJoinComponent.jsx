@@ -86,6 +86,7 @@ function RoomJoinComponent() {
                     label="RoomID "
                     value={roomID}
                     onChange={roomIDHandler}
+                    autoFocus
                   />
                 </Grid>
                 {error === "Incorrect game name or password, try again"
