@@ -6,6 +6,7 @@ const initState = {
   userIsReady: false,
   gameId: "",
   playerList: [],
+  error: {},
 };
 
 const gameDataReducer = (state = initState, action) => {
@@ -25,6 +26,11 @@ const gameDataReducer = (state = initState, action) => {
         gameName: payload.gameShortId,
         gameId: payload.gameId,
         playerList: payload.playerList,
+      };
+    case "UPDATE_ERROR":
+      return {
+        ...state,
+        error: payload,
       };
   }
 };

@@ -1,7 +1,11 @@
 import React, { createContext } from "react";
 import io from "socket.io-client";
 import { useDispatch } from "react-redux";
-import { updateGameData, updateUserID } from "./actions/gameDataActions";
+import {
+  updateError,
+  updateGameData,
+  updateUserID,
+} from "./actions/gameDataActions";
 
 const WebSocketContext = createContext(null);
 
@@ -31,7 +35,6 @@ const WebSocketProvider = ({ children }) => {
       },
     };
     socket.emit("action", payload);
-    // dispatch(updateGameID(payload));
   };
 
   if (!socket) {
@@ -44,7 +47,7 @@ const WebSocketProvider = ({ children }) => {
       dispatch(updateGameData(data));
     });
     socket.on("error", (error) => {
-      console.log(error);
+      dispatch(updateError(error));
     });
 
     ws = {

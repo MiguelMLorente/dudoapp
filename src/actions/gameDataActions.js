@@ -18,3 +18,10 @@ export const updateUserName = (newName) => (dispatch) => {
     payload: newName,
   });
 };
+
+export const updateError = (newError) => (dispatch) => {
+  dispatch({
+    type: "UPDATE_ERROR",
+    payload: newError,
+  });
+};
