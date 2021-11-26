@@ -6,6 +6,7 @@ import {
   updateGameData,
   updateUserID,
 } from "./actions/gameDataActions";
+import { changeToLoby } from "./actions/appStatusActions";
 
 const WebSocketContext = createContext(null);
 
@@ -45,6 +46,7 @@ const WebSocketProvider = ({ children }) => {
     });
     socket.on("joined-game", (data) => {
       dispatch(updateGameData(data));
+      dispatch(changeToLoby());
     });
     socket.on("error", (error) => {
       dispatch(updateError(error));

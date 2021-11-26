@@ -10,7 +10,8 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import thunk from "redux-thunk";
 import WebSocketProvider from "./WebSocket";
-
+//Routing
+import { BrowserRouter } from "react-router-dom";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
@@ -22,7 +23,9 @@ ReactDOM.render(
     <Provider store={store}>
       <WebSocketProvider>
         <CssBaseline>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </CssBaseline>
       </WebSocketProvider>
     </Provider>
