@@ -9,7 +9,7 @@ import { updateUserName } from "../actions/gameDataActions";
 
 function RoomJoinComponent() {
   const ws = useContext(WebSocketContext);
-  const uuid = useSelector((state) => state.gameData.userId);
+  const userUuid = useSelector((state) => state.gameData.userId);
   const dispatch = useDispatch();
   let error = useSelector((state) => state.gameData.error);
   let [userName, setUserName] = useState(sillyNameGenerator());
@@ -30,7 +30,7 @@ function RoomJoinComponent() {
 
   const joinRoomHandler = (e) => {
     dispatch(updateUserName(userName));
-    ws.sendJoinRequest(uuid, userName, roomID, roomPassword);
+    ws.sendJoinRequest(userUuid, userName, roomID, roomPassword);
     if (roomPassword !== "") {
       setTriedToJoin(true);
       setRoomPassword("");
