@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Button, Grid, Paper, Typography, Divider } from "@mui/material";
 import LogoComponent from "./LogoComponent";
 import PlayerNameComponent from "./PlayerNameComponent";
+import { useSelector } from "react-redux";
+import { WebSocketContext } from "../WebSocket";
 
 function LobbyComponent() {
-  const exampleJoinGameRequestResponse = {
-    gameId: "12334abcd",
-    playersList: [
-      { name: "Fancy Rhino", ready: true },
-      { name: "Brave Octopus", ready: true },
-      { name: "Reactive Chicken", ready: true },
-      { name: "Ludicrous Beaver", ready: false },
-    ],
+  const ws = useContext(WebSocketContext);
+  const roomId = useSelector((state) => state.gameData.gameName);
+  const userUuid = useSelector((state) => state.gameData.userId);
+  const gameUuid = useSelector((state) => state.gameData.gameId);
+  let playerList = useSelector((state) => state.gameData.playerList);
+  let [userReady, setUserReady] = useState(false);
+
+  const readyHandler = () => {
+    ws.sendReadyUpdate(userUuid, gameUuid, !userReady);
+    setUserReady((userReady) => !userReady);
   };
   return (
     <React.Fragment>
@@ -29,9 +33,7 @@ function LobbyComponent() {
                 className="playerFields"
               >
                 <Grid item>
-                  <Typography variant="h5">
-                    Room ID: {exampleJoinGameRequestResponse.gameId}
-                  </Typography>
+                  <Typography variant="h5">Room: {roomId}</Typography>
                 </Grid>
                 <Grid item>
                   <Grid container justifyContent="space-between">
@@ -40,30 +42,32 @@ function LobbyComponent() {
                     </Grid>
                     <Grid item>
                       <Typography variant="h4">
-                        {exampleJoinGameRequestResponse.playersList.length} / 8
+                        {playerList.length} / 8
                       </Typography>
                     </Grid>
                   </Grid>
                   <Divider />
                 </Grid>
-                {exampleJoinGameRequestResponse.playersList.map(
-                  (player, index) => {
-                    return (
-                      <Grid item key={index}>
-                        <PlayerNameComponent
-                          name={player.name}
-                          isReady={player.ready}
-                        />
-                      </Grid>
-                    );
-                  }
-                )}
+                {playerList.map((player, index) => {
+                  return (
+                    <Grid item key={index}>
+                      <PlayerNameComponent
+                        name={player.playerName}
+                        isReady={player.isReady}
+                      />
+                    </Grid>
+                  );
+                })}
                 <Grid item>
                   <Divider />
                 </Grid>
                 <Grid item>
-                  <Button fullWidth={true} variant="contained">
-                    READY
+                  <Button
+                    fullWidth={true}
+                    variant="contained"
+                    onClick={readyHandler}
+                  >
+                    {userReady ? "NOT READY" : "READY"}
                   </Button>
                 </Grid>
               </Grid>

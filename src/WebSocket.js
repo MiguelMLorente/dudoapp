@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   updateError,
   updateGameData,
+  updateLobby,
   updateUserID,
 } from "./actions/gameDataActions";
 import { changeToLoby } from "./actions/appStatusActions";
@@ -38,6 +39,20 @@ const WebSocketProvider = ({ children }) => {
     socket.emit("action", payload);
   };
 
+  const sendReadyUpdate = (userUuid, gameUuid, readyBool) => {
+    const payload = {
+      requester: {
+        uuid: userUuid,
+      },
+      actionType: "PLAYER READY",
+      actionData: {
+        gameId: gameUuid,
+        ready: readyBool,
+      },
+    };
+    socket.emit("action", payload);
+  };
+
   if (!socket) {
     socket = io("ws://localhost:8081");
 
@@ -48,6 +63,9 @@ const WebSocketProvider = ({ children }) => {
       dispatch(updateGameData(data));
       dispatch(changeToLoby());
     });
+    socket.on("lobby-update", (data) => {
+      dispatch(updateLobby(data));
+    });
     socket.on("error", (error) => {
       dispatch(updateError(error));
     });
@@ -55,6 +73,7 @@ const WebSocketProvider = ({ children }) => {
     ws = {
       socket: socket,
       sendJoinRequest,
+      sendReadyUpdate,
     };
   }
   return (

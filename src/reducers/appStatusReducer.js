@@ -3,8 +3,6 @@ const initState = {
 };
 
 const appStatusReducer = (state = initState, action) => {
-  let payload = action.payload;
-
   switch (action.type) {
     default:
       return { ...state };

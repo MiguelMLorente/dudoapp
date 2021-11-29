@@ -19,6 +19,13 @@ export const updateUserName = (newName) => (dispatch) => {
   });
 };
 
+export const updateLobby = (newLobby) => (dispatch) => {
+  dispatch({
+    type: "UPDATE_LOBBY",
+    payload: newLobby,
+  });
+};
+
 export const updateError = (newError) => (dispatch) => {
   dispatch({
     type: "UPDATE_ERROR",

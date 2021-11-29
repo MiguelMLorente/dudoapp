@@ -27,6 +27,9 @@ const gameDataReducer = (state = initState, action) => {
         gameId: payload.gameId,
         playerList: payload.playerList,
       };
+    case "UPDATE_LOBBY": {
+      return { ...state, playerList: payload.playerList };
+    }
     case "UPDATE_ERROR":
       return {
         ...state,
