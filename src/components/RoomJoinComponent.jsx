@@ -28,6 +28,12 @@ function RoomJoinComponent() {
     setRoomID(e.target.value);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      joinRoomHandler();
+    }
+  };
+
   const joinRoomHandler = (e) => {
     dispatch(updateUserName(userName));
     ws.sendJoinRequest(userUuid, userName, roomID, roomPassword);
@@ -86,6 +92,7 @@ function RoomJoinComponent() {
                     label="RoomID "
                     value={roomID}
                     onChange={roomIDHandler}
+                    onKeyPress={handleKeyPress}
                     autoFocus
                   />
                 </Grid>
