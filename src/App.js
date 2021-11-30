@@ -4,7 +4,7 @@ import GlobalStyle from "./globalStyles";
 import { Grid } from "@mui/material";
 import RoomJoinComponent from "./components/RoomJoinComponent";
 import { useSelector } from "react-redux";
-// import NewRoomComponent from "./components/newRoomComponent";
+import NewRoomComponent from "./components/newRoomComponent";
 import LobbyComponent from "./components/LobbyComponent";
 // import GameInProgressComponent from "./components/GameInProgressComponent";
 
@@ -17,6 +17,8 @@ function App() {
         return <RoomJoinComponent />;
       case "Lobby":
         return <LobbyComponent />;
+      case "NewRoom":
+        return <NewRoomComponent />;
     }
   };
 

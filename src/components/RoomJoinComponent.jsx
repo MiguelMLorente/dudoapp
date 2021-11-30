@@ -6,6 +6,7 @@ import sillyNameGenerator from "../userNameUtils";
 import { useDispatch, useSelector } from "react-redux";
 import { WebSocketContext } from "../WebSocket";
 import { updateUserName } from "../actions/gameDataActions";
+import { changeToNewRoom } from "../actions/appStatusActions";
 
 function RoomJoinComponent() {
   const ws = useContext(WebSocketContext);
@@ -66,6 +67,10 @@ function RoomJoinComponent() {
     );
   };
 
+  const handleNewRoom = () => {
+    dispatch(changeToNewRoom());
+  };
+
   useEffect(() => {
     if (error === "Game not found") {
       setRoomIdHelperText("Game does not exist");
@@ -124,7 +129,11 @@ function RoomJoinComponent() {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" fullWidth={true}>
+                  <Button
+                    variant="contained"
+                    fullWidth={true}
+                    onClick={handleNewRoom}
+                  >
                     Create Room
                   </Button>
                 </Grid>

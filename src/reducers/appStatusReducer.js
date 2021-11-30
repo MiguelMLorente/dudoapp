@@ -8,6 +8,10 @@ const appStatusReducer = (state = initState, action) => {
       return { ...state };
     case "LOBBY":
       return { ...state, component: "Lobby" };
+    case "NEW_ROOM":
+      return { ...state, component: "NewRoom" };
+    case "JOIN_ROOM":
+      return { ...state, component: "" };
   }
 };
 

@@ -2,8 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { TextField, Grid, Button, Paper } from "@mui/material";
 import LogoComponent from "./LogoComponent";
+import { changeToJoinRoom } from "../actions/appStatusActions";
+import { useDispatch } from "react-redux";
 
 function NewRoomComponent() {
+  const dispatch = useDispatch();
+  const handleBack = () => {
+    dispatch(changeToJoinRoom());
+  };
   return (
     <React.Fragment>
       <StyledContainer>
@@ -44,6 +50,15 @@ function NewRoomComponent() {
                 <Grid item>
                   <Button variant="contained" fullWidth={true}>
                     Create Room
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    fullWidth={true}
+                    onClick={handleBack}
+                  >
+                    BACK
                   </Button>
                 </Grid>
               </Grid>
