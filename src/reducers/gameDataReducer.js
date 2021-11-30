@@ -1,6 +1,8 @@
+import sillyNameGenerator from "../userNameUtils";
+
 const initState = {
   userId: "",
-  name: "",
+  name: sillyNameGenerator(),
   gameName: "",
   gamePassword: "",
   userIsReady: false,

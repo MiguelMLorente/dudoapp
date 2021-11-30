@@ -13,7 +13,9 @@ function RoomJoinComponent() {
   const userUuid = useSelector((state) => state.gameData.userId);
   const dispatch = useDispatch();
   let error = useSelector((state) => state.gameData.error);
-  let [userName, setUserName] = useState(sillyNameGenerator());
+  let [userName, setUserName] = useState(
+    useSelector((state) => state.gameData.name)
+  );
   let [roomID, setRoomID] = useState("");
   let [roomPassword, setRoomPassword] = useState("");
   let [passwordHelperText, setPaswordHelperText] = useState(
