@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { TextField, Grid, Button, Paper } from "@mui/material";
 import LogoComponent from "./LogoComponent";
 import { changeToJoinRoom } from "../actions/appStatusActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { WebSocketContext } from "../WebSocket";
 
 function NewRoomComponent() {
+  const ws = useContext(WebSocketContext);
+  const userUuid = useSelector((state) => state.gameData.userId);
   const dispatch = useDispatch();
+  let [userName, setUserName] = useState(
+    useSelector((state) => state.gameData.name)
+  );
+  let [password, setPassword] = useState("");
+
   const handleBack = () => {
     dispatch(changeToJoinRoom());
   };
+
+  const userNameHandler = (e) => {
+    setUserName(e.target.value);
+  };
+  const passwordHandler = (e) => {
+    setPassword(e.target.value);
+  };
+
   return (
     <React.Fragment>
       <StyledContainer>
@@ -26,16 +42,20 @@ function NewRoomComponent() {
               >
                 <Grid item>
                   <TextField
-                    id="roomCode"
-                    label="RoomID"
-                    defaultValue="A34BERS"
+                    id="nameInput"
+                    label="Username"
+                    value={userName}
+                    onChange={userNameHandler}
                   />
                 </Grid>
                 <Grid item>
                   <TextField
+                    type="password"
                     id="passwordInput"
-                    label="Password: "
-                    defaultValue="*******"
+                    label="Password "
+                    value={password}
+                    onChange={passwordHandler}
+                    helperText="Optional"
                   />
                 </Grid>
                 <Grid item>
@@ -44,11 +64,6 @@ function NewRoomComponent() {
                     fullWidth={true}
                     color="secondary"
                   >
-                    Copy Code
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" fullWidth={true}>
                     Create Room
                   </Button>
                 </Grid>
