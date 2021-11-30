@@ -5,6 +5,7 @@ import LogoComponent from "./LogoComponent";
 import { changeToJoinRoom } from "../actions/appStatusActions";
 import { useDispatch, useSelector } from "react-redux";
 import { WebSocketContext } from "../WebSocket";
+import { updateUserName } from "../actions/gameDataActions";
 
 function NewRoomComponent() {
   const ws = useContext(WebSocketContext);
@@ -16,14 +17,17 @@ function NewRoomComponent() {
   let [password, setPassword] = useState("");
 
   const handleBack = () => {
+    dispatch(updateUserName(userName));
     dispatch(changeToJoinRoom());
   };
-
   const userNameHandler = (e) => {
     setUserName(e.target.value);
   };
   const passwordHandler = (e) => {
     setPassword(e.target.value);
+  };
+  const submitHandler = () => {
+    ws.sendCreateGame(userUuid, userName, password);
   };
 
   return (
@@ -63,6 +67,7 @@ function NewRoomComponent() {
                     variant="contained"
                     fullWidth={true}
                     color="secondary"
+                    onClick={submitHandler}
                   >
                     Create Room
                   </Button>

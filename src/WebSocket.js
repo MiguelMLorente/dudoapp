@@ -39,6 +39,19 @@ const WebSocketProvider = ({ children }) => {
     socket.emit("action", payload);
   };
 
+  const sendCreateGame = (userUuid, userName, requestedGamePassword) => {
+    const payload = {
+      requester: {
+        uuid: userUuid,
+        name: userName,
+      },
+      actionType: "CREATE GAME",
+      actionData: {
+        gamePassword: requestedGamePassword,
+      },
+    };
+    socket.emit("action", payload);
+  };
   const sendReadyUpdate = (userUuid, gameUuid, readyBool) => {
     const payload = {
       requester: {
@@ -73,6 +86,7 @@ const WebSocketProvider = ({ children }) => {
     ws = {
       socket: socket,
       sendJoinRequest,
+      sendCreateGame,
       sendReadyUpdate,
     };
   }

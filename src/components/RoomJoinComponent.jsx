@@ -69,6 +69,7 @@ function RoomJoinComponent() {
   };
 
   const handleNewRoom = () => {
+    dispatch(updateUserName(userName));
     dispatch(changeToNewRoom());
   };
 
