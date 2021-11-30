@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { TextField, Grid, Button, Paper } from "@mui/material";
 import LogoComponent from "./LogoComponent";
@@ -18,7 +18,9 @@ function RoomJoinComponent() {
   let [passwordHelperText, setPaswordHelperText] = useState(
     "Looks like this room has a password"
   );
+  let [roomIdHelperText, setRoomIdHelperText] = useState("");
   let [triedToJoin, setTriedToJoin] = useState(false);
+  let [gameNotFound, setGameNotFound] = useState(false);
 
   const userNameHandler = (e) => {
     setUserName(e.target.value);
@@ -64,6 +66,17 @@ function RoomJoinComponent() {
     );
   };
 
+  useEffect(() => {
+    if (error === "Game not found") {
+      setRoomIdHelperText("Game does not exist");
+      setGameNotFound(true);
+    }
+    if (error === "" || error === "Incorrect password, try again") {
+      setRoomIdHelperText("");
+      setGameNotFound(false);
+    }
+  }, [error]);
+
   return (
     <React.Fragment>
       <StyledContainer>
@@ -91,12 +104,14 @@ function RoomJoinComponent() {
                     id="roomInput"
                     label="RoomID "
                     value={roomID}
+                    helperText={roomIdHelperText}
+                    error={gameNotFound}
                     onChange={roomIDHandler}
                     onKeyPress={handleKeyPress}
                     autoFocus
                   />
                 </Grid>
-                {error === "Incorrect game name or password, try again"
+                {error === "Incorrect password, try again"
                   ? passwordInputDisplayHandler()
                   : ""}
                 <Grid item>
