@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { TextField, Grid, Button, Paper } from "@mui/material";
 import LogoComponent from "./LogoComponent";
-import sillyNameGenerator from "../userNameUtils";
 import { useDispatch, useSelector } from "react-redux";
 import { WebSocketContext } from "../WebSocket";
 import { updateUserName } from "../actions/gameDataActions";
