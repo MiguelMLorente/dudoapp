@@ -12,6 +12,8 @@ const appStatusReducer = (state = initState, action) => {
       return { ...state, component: "NewRoom" };
     case "JOIN_ROOM":
       return { ...state, component: "" };
+    case "GAME_IN_PROGRESS":
+      return { ...state, component: "GameInProgress" };
   }
 };
 

@@ -12,8 +12,6 @@ const initState = {
 };
 
 const gameDataReducer = (state = initState, action) => {
-  console.log("Reducer fired with action: ");
-  console.log(action);
   let payload = action.payload;
   switch (action.type) {
     default:
