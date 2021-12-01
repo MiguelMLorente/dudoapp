@@ -18,6 +18,7 @@ function LobbyComponent() {
     ws.sendReadyUpdate(userUuid, gameUuid, !userReady);
     setUserReady((userReady) => !userReady);
   };
+
   return (
     <React.Fragment>
       <StyledContainer>

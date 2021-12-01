@@ -7,7 +7,11 @@ import {
   updateLobby,
   updateUserID,
 } from "./actions/gameDataActions";
-import { changeToLoby } from "./actions/appStatusActions";
+import {
+  changeToGameInProgress,
+  changeToLoby,
+} from "./actions/appStatusActions";
+import { updateGameStatus } from "./actions/gameStatusActions";
 
 const WebSocketContext = createContext(null);
 
@@ -78,6 +82,10 @@ const WebSocketProvider = ({ children }) => {
     });
     socket.on("lobby-update", (data) => {
       dispatch(updateLobby(data));
+    });
+    socket.on("game-status", (data) => {
+      dispatch(updateGameStatus(data));
+      dispatch(changeToGameInProgress());
     });
     socket.on("error", (error) => {
       dispatch(updateError(error));

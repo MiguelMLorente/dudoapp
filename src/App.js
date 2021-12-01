@@ -6,7 +6,7 @@ import RoomJoinComponent from "./components/RoomJoinComponent";
 import { useSelector } from "react-redux";
 import NewRoomComponent from "./components/newRoomComponent";
 import LobbyComponent from "./components/LobbyComponent";
-// import GameInProgressComponent from "./components/GameInProgressComponent";
+import GameInProgressComponent from "./components/GameInProgressComponent";
 
 function App() {
   let currentComponent = useSelector((state) => state.appStatus.component);
@@ -19,6 +19,8 @@ function App() {
         return <LobbyComponent />;
       case "NewRoom":
         return <NewRoomComponent />;
+      case "GameInProgress":
+        return <GameInProgressComponent />;
     }
   };
 

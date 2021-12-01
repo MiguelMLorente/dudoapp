@@ -15,3 +15,9 @@ export const changeToJoinRoom = () => (dispatch) => {
     type: "JOIN_ROOM",
   });
 };
+
+export const changeToGameInProgress = () => (dispatch) => {
+  dispatch({
+    type: "GAME_IN_PROGRESS",
+  });
+};
