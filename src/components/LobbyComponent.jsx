@@ -71,6 +71,18 @@ function LobbyComponent() {
                     {userReady ? "NOT READY" : "READY"}
                   </Button>
                 </Grid>
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      navigator.clipboard.writeText(roomId);
+                    }}
+                    fullWidth={true}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    COPY ROOM CODE
+                  </Button>
+                </Grid>
               </Grid>
             </StyledPaper>
           </Grid>
