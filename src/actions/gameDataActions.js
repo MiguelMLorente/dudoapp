@@ -19,6 +19,13 @@ export const updateUserName = (newName) => (dispatch) => {
   });
 };
 
+export const updateAdminPrivilege = (newBool) => (dispatch) => {
+  dispatch({
+    type: "UPDATE_ADMIN",
+    payload: newBool,
+  });
+};
+
 export const updateLobby = (newLobby) => (dispatch) => {
   dispatch({
     type: "UPDATE_LOBBY",

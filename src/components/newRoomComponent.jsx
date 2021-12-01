@@ -5,7 +5,10 @@ import LogoComponent from "./LogoComponent";
 import { changeToJoinRoom } from "../actions/appStatusActions";
 import { useDispatch, useSelector } from "react-redux";
 import { WebSocketContext } from "../WebSocket";
-import { updateUserName } from "../actions/gameDataActions";
+import {
+  updateAdminPrivilege,
+  updateUserName,
+} from "../actions/gameDataActions";
 
 function NewRoomComponent() {
   const ws = useContext(WebSocketContext);
@@ -27,6 +30,7 @@ function NewRoomComponent() {
     setPassword(e.target.value);
   };
   const submitHandler = () => {
+    dispatch(updateAdminPrivilege(true));
     ws.sendCreateGame(userUuid, userName, password);
   };
 

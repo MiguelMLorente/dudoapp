@@ -8,6 +8,7 @@ const initState = {
   userIsReady: false,
   gameId: "",
   playerList: [],
+  isAdmin: false,
   error: {},
 };
 
@@ -20,6 +21,8 @@ const gameDataReducer = (state = initState, action) => {
       return { ...state, userId: payload.userId };
     case "UPDATE_USERNAME":
       return { ...state, name: payload };
+    case "UPDATE_ADMIN":
+      return { ...state, isAdmin: payload };
     case "UPDATE_GAME_DATA":
       return {
         ...state,
@@ -28,7 +31,11 @@ const gameDataReducer = (state = initState, action) => {
         playerList: payload.playerList,
       };
     case "UPDATE_LOBBY": {
-      return { ...state, playerList: payload.playerList };
+      return {
+        ...state,
+        playerList: payload.playerList,
+        isAdmin: payload.hasAdminPermissions,
+      };
     }
     case "UPDATE_ERROR":
       return {
