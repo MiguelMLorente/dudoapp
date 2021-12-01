@@ -6,14 +6,19 @@ import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 function PlayerNameComponent(props) {
+  const userName = useSelector((state) => state.gameData.name);
   let isAdmin = useSelector((state) => state.gameData.isAdmin);
 
   const kickDisplay = () => {
-    return (
-      <Grid item>
-        <StyledFontAwesomeIcon icon={faMinusSquare} />
-      </Grid>
-    );
+    if (props.name === userName) {
+      return;
+    } else {
+      return (
+        <Grid item>
+          <StyledFontAwesomeIcon icon={faMinusSquare} />
+        </Grid>
+      );
+    }
   };
   return (
     <Paper elevation={2} className={props.isReady ? "isReady" : ""}>
