@@ -70,6 +70,20 @@ const WebSocketProvider = ({ children }) => {
     socket.emit("action", payload);
   };
 
+  const sendKickRequest = (userUuid, gameUuid, kickedUserRequest) => {
+    const payload = {
+      requester: {
+        uuid: userUuid,
+      },
+      actionType: "KICK USER",
+      actionData: {
+        gameId: gameUuid,
+        kickedUser: kickedUserRequest,
+      },
+    };
+    socket.emit("action", payload);
+  };
+
   if (!socket) {
     socket = io("ws://localhost:8081");
 
@@ -96,6 +110,7 @@ const WebSocketProvider = ({ children }) => {
       sendJoinRequest,
       sendCreateGame,
       sendReadyUpdate,
+      sendKickRequest,
     };
   }
   return (
