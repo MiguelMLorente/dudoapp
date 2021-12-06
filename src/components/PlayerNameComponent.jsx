@@ -44,6 +44,7 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
   margin-top: 0.25rem;
   font-size: 2rem;
+  cursor: pointer;
 `;
 const StyledTypography = styled(Typography)`
   padding-left: 1rem;
