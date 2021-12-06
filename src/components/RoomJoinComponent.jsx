@@ -5,9 +5,10 @@ import {
   Grid,
   Button,
   Paper,
-  Modal,
-  Box,
-  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContentText,
+  DialogContent,
 } from "@mui/material";
 import LogoComponent from "./LogoComponent";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,18 +33,6 @@ function RoomJoinComponent() {
   let [roomIdHelperText, setRoomIdHelperText] = useState("");
   let [triedToJoin, setTriedToJoin] = useState(false);
   let [gameNotFound, setGameNotFound] = useState(false);
-
-  const modalBoxStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
 
   const userNameHandler = (e) => {
     setUserName(e.target.value);
@@ -112,17 +101,17 @@ function RoomJoinComponent() {
   return (
     <React.Fragment>
       <StyledContainer>
-        <Modal open={userKicked} onClose={handleClose}>
-          <Box sx={modalBoxStyle}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              You have been kicked
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        <Dialog open={userKicked} onClose={handleClose}>
+          <DialogTitle id="modal-modal-title" variant="h6" component="h2">
+            You have been kicked
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="modal-modal-description" sx={{ mt: 2 }}>
               Sorry, you have been kicked by the admin of the room, click
               outside this box to continue
-            </Typography>
-          </Box>
-        </Modal>
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
         <StyledGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
             <StyledPaper>
