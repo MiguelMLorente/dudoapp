@@ -21,3 +21,10 @@ export const changeToGameInProgress = () => (dispatch) => {
     type: "GAME_IN_PROGRESS",
   });
 };
+
+export const updateKickStatus = (newBool) => (dispatch) => {
+  dispatch({
+    type: "UPDATE_KICKED_STATUS",
+    payload: newBool,
+  });
+};

@@ -9,7 +9,10 @@ import {
 } from "./actions/gameDataActions";
 import {
   changeToGameInProgress,
+  changeToJoinRoom,
   changeToLoby,
+  changeToNewRoom,
+  updateKickStatus,
 } from "./actions/appStatusActions";
 import { updateGameStatus } from "./actions/gameStatusActions";
 
@@ -100,6 +103,12 @@ const WebSocketProvider = ({ children }) => {
     socket.on("game-status", (data) => {
       dispatch(updateGameStatus(data));
       dispatch(changeToGameInProgress());
+    });
+    socket.on("kicked-player", () => {
+      //This case is special, the server only sends
+      // an empty string, so we pass the bool to the store.
+      dispatch(updateKickStatus(true));
+      dispatch(changeToJoinRoom());
     });
     socket.on("error", (error) => {
       dispatch(updateError(error));
