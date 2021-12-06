@@ -11,7 +11,6 @@ import {
   changeToGameInProgress,
   changeToJoinRoom,
   changeToLoby,
-  changeToNewRoom,
   updateKickStatus,
 } from "./actions/appStatusActions";
 import { updateGameStatus } from "./actions/gameStatusActions";
