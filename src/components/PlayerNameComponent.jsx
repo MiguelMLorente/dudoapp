@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, Paper, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { WebSocketContext } from "../WebSocket";
 
 function PlayerNameComponent(props) {
+  const ws = useContext(WebSocketContext);
   const userName = useSelector((state) => state.gameData.name);
+  const userUuid = useSelector((state) => state.gameData.userId);
+  const gameUuid = useSelector((state) => state.gameData.gameId);
   let isAdmin = useSelector((state) => state.gameData.isAdmin);
+
+  const kickHandler = () => {
+    ws.sendKickRequest(userUuid, gameUuid, props.name);
+  };
 
   const kickDisplay = () => {
     if (props.name === userName) {
@@ -15,7 +23,7 @@ function PlayerNameComponent(props) {
     } else {
       return (
         <Grid item>
-          <StyledFontAwesomeIcon icon={faMinusSquare} />
+          <StyledFontAwesomeIcon icon={faMinusSquare} onClick={kickHandler} />
         </Grid>
       );
     }
@@ -36,6 +44,7 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
   margin-top: 0.25rem;
   font-size: 2rem;
+  cursor: pointer;
 `;
 const StyledTypography = styled(Typography)`
   padding-left: 1rem;

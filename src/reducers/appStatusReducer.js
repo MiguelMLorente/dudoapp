@@ -1,8 +1,10 @@
 const initState = {
   component: "RoomJoin",
+  userKicked: false,
 };
 
 const appStatusReducer = (state = initState, action) => {
+  let payload = action.payload;
   switch (action.type) {
     default:
       return { ...state };
@@ -14,6 +16,8 @@ const appStatusReducer = (state = initState, action) => {
       return { ...state, component: "" };
     case "GAME_IN_PROGRESS":
       return { ...state, component: "GameInProgress" };
+    case "UPDATE_KICKED_STATUS":
+      return { ...state, userKicked: payload };
   }
 };
 
