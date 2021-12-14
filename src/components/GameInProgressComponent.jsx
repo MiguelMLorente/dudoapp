@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useSelector } from "react-redux";
+import { WebSocketContext } from "../WebSocket";
 import styled from "styled-components";
 import { Button, Grid, Paper, Typography, Divider } from "@mui/material";
 import LogoComponent from "./LogoComponent";
@@ -7,6 +9,18 @@ import DiceDisplayComponent from "./InGameComponents/DiceDisplayComponent";
 import DiceSelector from "./InGameComponents/DiceSelector";
 
 function GameInProgressComponent() {
+  // const ws = useContext(WebSocketContext);
+  // const roomId = useSelector((state) => state.gameData.gameName);
+  // const gameUuid = useSelector((state) => state.gameData.gameId);
+  // const userUuid = useSelector((state) => state.gameData.userId);
+  const userName = useSelector((state) => state.gameData.name);
+  let currentBid = useSelector((state) => state.gameStatus.currentBid);
+  let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
+  //this needs to go in a useEffect or it wont update
+  let selfInfo = playersInfo.filter((object) => {
+    return object.playerName === userName;
+  });
+
   return (
     <React.Fragment>
       <StyledContainer>
@@ -23,22 +37,28 @@ function GameInProgressComponent() {
               >
                 <Grid item>
                   <Typography>Your Dice </Typography>
-                  <DiceDisplayComponent diceValues={[1, 1, 5, 1, 1]} />
+                  <DiceDisplayComponent diceValues={selfInfo[0].diceValue} />
                 </Grid>
                 <Grid item>
                   <Divider />
                 </Grid>
-                <Grid item>
-                  Current bid:
-                  <BidDisplayComponent
-                    name="Biggus Biddus"
-                    value={5}
-                    number={10}
-                  />
-                </Grid>
-                <Grid item>
-                  <Divider />
-                </Grid>
+                {currentBid ? (
+                  <React.Fragment>
+                    <Grid item>
+                      Current bid:
+                      <BidDisplayComponent
+                        name="Biggus Biddus"
+                        value={5}
+                        number={10}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Divider />
+                    </Grid>
+                  </React.Fragment>
+                ) : (
+                  ""
+                )}
                 <Grid item>
                   Now Playing:
                   <BidDisplayComponent name="Incontinentia Timus" isPlaying />

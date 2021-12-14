@@ -14,6 +14,7 @@ function DiceDisplayComponent(props) {
       variantClassName = "small-dice";
       break;
   }
+
   return (
     <React.Fragment>
       <StyledPaper elevation={3}>
