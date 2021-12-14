@@ -74,6 +74,10 @@ function RoomJoinComponent() {
   };
 
   useEffect(() => {
+    if (error === "Game is full") {
+      setRoomIdHelperText("This room is full");
+      setGameNotFound(true);
+    }
     if (error === "Game not found") {
       setRoomIdHelperText("Game does not exist");
       setGameNotFound(true);
