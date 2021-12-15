@@ -1,4 +1,11 @@
-const initState = {};
+const initState = {
+  bidSelector: {
+    diceValue: 1,
+    diceNumber:1
+  }
+
+
+};
 
 const gameStatusReducer = (state = initState, action) => {
   let payload = action.payload;
@@ -6,7 +13,9 @@ const gameStatusReducer = (state = initState, action) => {
     default:
       return { ...state };
     case "UPDATE_GAMESTATUS":
-      return { ...payload };
+      return {...state, ...payload };
+    case 'UPDATE_BID_SELECTOR':
+      return {...state, bidSelector: payload}
   }
 };
 
