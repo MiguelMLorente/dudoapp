@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { WebSocketContext } from "../WebSocket";
 import styled from "styled-components";
@@ -16,10 +16,37 @@ function GameInProgressComponent() {
   const userName = useSelector((state) => state.gameData.name);
   let currentBid = useSelector((state) => state.gameStatus.currentBid);
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
-  //this needs to go in a useEffect or it wont update
-  let selfInfo = playersInfo.filter((object) => {
-    return object.playerName === userName;
-  });
+
+  let [selfInfo, setSelfInfo] = useState(
+    playersInfo.filter((object) => {
+      return object.playerName === userName;
+    })
+  );
+  let [activePlayer, setActivePlayer] = useState(
+    playersInfo.filter((object) => {
+      return object.isActive === true;
+    })
+  );
+
+  useEffect(() => {
+    setSelfInfo(
+      playersInfo.filter((object) => {
+        return object.playerName === userName;
+      })
+    );
+
+    setActivePlayer(
+      playersInfo.filter((object) => {
+        return object.isActive === true;
+      })
+    );
+  }, [playersInfo, userName]);
+
+  useEffect(() => {
+    if (activePlayer[0].playerName === userName) {
+      activePlayer[0].playerName = "You";
+    }
+  }, [activePlayer, userName]);
 
   return (
     <React.Fragment>
@@ -47,9 +74,9 @@ function GameInProgressComponent() {
                     <Grid item>
                       Current bid:
                       <BidDisplayComponent
-                        name="Biggus Biddus"
-                        value={5}
-                        number={10}
+                        name={currentBid.doneBy}
+                        value={currentBid.diceValue}
+                        number={currentBid.diceNumber}
                       />
                     </Grid>
                     <Grid item>
@@ -61,7 +88,10 @@ function GameInProgressComponent() {
                 )}
                 <Grid item>
                   Now Playing:
-                  <BidDisplayComponent name="Incontinentia Timus" isPlaying />
+                  <BidDisplayComponent
+                    name={activePlayer[0].playerName}
+                    isPlaying
+                  />
                 </Grid>
                 <Grid item>
                   <Divider />
