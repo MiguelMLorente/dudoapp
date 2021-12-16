@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Grid, Paper } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -41,16 +41,18 @@ function DiceSelector() {
         <Grid container wrap="nowrap" spacing={3}>
           <Grid container direction="column" item>
             <Grid item>
-              <FontAwesomeIcon
+              <StyledIconFAChevron
                 icon={faChevronUp}
                 onClick={() => {
                   handleDiceValueChange(1);
                 }}
               />
             </Grid>
-            <Grid item>{valueToDiceIcon(bidSelector.diceValue)}</Grid>
             <Grid item>
-              <FontAwesomeIcon
+              {valueToDiceIcon(bidSelector ? bidSelector.diceValue : 1)}
+            </Grid>
+            <Grid item>
+              <StyledIconFAChevron
                 icon={faChevronDown}
                 onClick={() => {
                   handleDiceValueChange(-1);
@@ -59,20 +61,20 @@ function DiceSelector() {
             </Grid>
           </Grid>
           <Grid item>
-            <FontAwesomeIcon icon={faTimes} />
+            <StyledIconFATimes icon={faTimes} />
           </Grid>
           <Grid container direction="column" item>
             <Grid item>
-              <FontAwesomeIcon
+              <StyledIconFAChevron
                 icon={faChevronUp}
                 onClick={() => {
                   handleDiceNumberChange(1);
                 }}
               />
             </Grid>
-            <Grid item>{bidSelector.diceNumber}</Grid>
+            <Grid item>{bidSelector ? bidSelector.diceNumber : 1}</Grid>
             <Grid item>
-              <FontAwesomeIcon
+              <StyledIconFAChevron
                 icon={faChevronDown}
                 onClick={() => {
                   handleDiceNumberChange(-1);
@@ -89,6 +91,14 @@ function DiceSelector() {
 const StyledPaper = styled(Paper)`
   font-size: 1.5rem;
   padding: 0.5rem 2.5rem 0.5rem 2.5rem;
+`;
+
+const StyledIconFATimes = styled(FontAwesomeIcon)`
+  margin-top: 2.5rem;
+`;
+
+const StyledIconFAChevron = styled(FontAwesomeIcon)`
+  cursor: pointer;
 `;
 
 export default DiceSelector;

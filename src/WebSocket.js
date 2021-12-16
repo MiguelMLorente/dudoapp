@@ -86,6 +86,21 @@ const WebSocketProvider = ({ children }) => {
     socket.emit("action", payload);
   };
 
+  const sendBidRequest = (userUuid,gameUuid, requestedDiceQuantity, requestedDiceValue)=>{
+    const payload ={
+      requester:{
+        uuid: userUuid
+      },
+      actionType:"BID",
+      actionData: {
+        gameId: gameUuid,
+        diceQuantity: requestedDiceQuantity,
+        diceValue: requestedDiceValue
+      }
+    }
+    socket.emit("action", payload)
+  }
+
   if (!socket) {
     socket = io("ws://localhost:8081");
 
@@ -119,6 +134,7 @@ const WebSocketProvider = ({ children }) => {
       sendCreateGame,
       sendReadyUpdate,
       sendKickRequest,
+      sendBidRequest,
     };
   }
   return (

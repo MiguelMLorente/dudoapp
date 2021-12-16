@@ -9,13 +9,13 @@ import DiceDisplayComponent from "./InGameComponents/DiceDisplayComponent";
 import DiceSelector from "./InGameComponents/DiceSelector";
 
 function GameInProgressComponent() {
-  // const ws = useContext(WebSocketContext);
-  // const roomId = useSelector((state) => state.gameData.gameName);
-  // const gameUuid = useSelector((state) => state.gameData.gameId);
-  // const userUuid = useSelector((state) => state.gameData.userId);
+  const ws = useContext(WebSocketContext);
+  const gameUuid = useSelector((state) => state.gameData.gameId);
+  const userUuid = useSelector((state) => state.gameData.userId);
   const userName = useSelector((state) => state.gameData.name);
   let currentBid = useSelector((state) => state.gameStatus.currentBid);
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
+  let bidSelector = useSelector((state) => state.gameStatus.bidSelector);
 
   let [selfInfo, setSelfInfo] = useState(
     playersInfo.filter((object) => {
@@ -47,6 +47,15 @@ function GameInProgressComponent() {
       activePlayer[0].playerName = "You";
     }
   }, [activePlayer, userName]);
+
+  const handleBid = () => {
+    ws.sendBidRequest(
+      userUuid,
+      gameUuid,
+      bidSelector.diceValue,
+      bidSelector.diceNumber
+    );
+  };
 
   return (
     <React.Fragment>
@@ -101,7 +110,9 @@ function GameInProgressComponent() {
                     <Grid container justifyContent="center">
                       <Grid container item justifyContent="space-around">
                         <StyledButtonGrid item>
-                          <Button variant="outlined">Bid</Button>
+                          <Button variant="outlined" onClick={handleBid}>
+                            Bid
+                          </Button>
                         </StyledButtonGrid>
                         <Grid item>
                           <DiceSelector />
