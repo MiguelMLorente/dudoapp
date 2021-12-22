@@ -18,33 +18,45 @@ function GameInProgressComponent() {
   let bidSelector = useSelector((state) => state.gameStatus.bidSelector);
 
   let [selfInfo, setSelfInfo] = useState(
-    playersInfo.filter((object) => {
-      return object.playerName === userName;
-    })
+    playersInfo
+      .filter((object) => {
+        return object.playerName === userName;
+      })
+      .shift()
   );
   let [activePlayer, setActivePlayer] = useState(
-    playersInfo.filter((object) => {
-      return object.isActive === true;
-    })
+    playersInfo
+      .filter((object) => {
+        return object.isActive === true;
+      })
+      .shift()
   );
+
+  const handleActivePlayerUpdateName = (newName) => {
+    setActivePlayer({ ...activePlayer, playerName: newName });
+  };
 
   useEffect(() => {
     setSelfInfo(
-      playersInfo.filter((object) => {
-        return object.playerName === userName;
-      })
+      playersInfo
+        .filter((object) => {
+          return object.playerName === userName;
+        })
+        .shift()
     );
 
     setActivePlayer(
-      playersInfo.filter((object) => {
-        return object.isActive === true;
-      })
+      playersInfo
+        .filter((object) => {
+          return object.isActive === true;
+        })
+        .shift()
     );
   }, [playersInfo, userName]);
 
   useEffect(() => {
-    if (activePlayer[0].playerName === userName) {
-      activePlayer[0].playerName = "You";
+    if (activePlayer.playerName === userName) {
+      handleActivePlayerUpdateName("You");
     }
   }, [activePlayer, userName]);
 
@@ -73,7 +85,7 @@ function GameInProgressComponent() {
               >
                 <Grid item>
                   <Typography>Your Dice </Typography>
-                  <DiceDisplayComponent diceValues={selfInfo[0].diceValue} />
+                  <DiceDisplayComponent diceValues={selfInfo.diceValue} />
                 </Grid>
                 <Grid item>
                   <Divider />
@@ -98,7 +110,7 @@ function GameInProgressComponent() {
                 <Grid item>
                   Now Playing:
                   <BidDisplayComponent
-                    name={activePlayer[0].playerName}
+                    name={activePlayer.playerName}
                     isPlaying
                   />
                 </Grid>
