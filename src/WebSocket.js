@@ -101,6 +101,19 @@ const WebSocketProvider = ({ children }) => {
     socket.emit("action", payload)
   }
 
+  const sendEndOfRoundRequest = (userUuid, requestedAction, gameUuid) => {
+    const payload = {
+      requester : {
+        uuid : userUuid
+      },
+      actionType : requestedAction,
+      actionData : {
+        gameId : gameUuid
+      }
+    }
+    socket.emit('action', payload)
+  }
+
   if (!socket) {
     socket = io("ws://localhost:8081");
 
@@ -135,6 +148,7 @@ const WebSocketProvider = ({ children }) => {
       sendReadyUpdate,
       sendKickRequest,
       sendBidRequest,
+      sendEndOfRoundRequest,
     };
   }
   return (

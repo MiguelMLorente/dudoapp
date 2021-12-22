@@ -69,6 +69,10 @@ function GameInProgressComponent() {
     );
   };
 
+  const handleEndOfRoundRequest = (actionType) => {
+    ws.sendEndOfRoundRequest(userUuid, actionType, gameUuid);
+  };
+
   return (
     <React.Fragment>
       <StyledContainer>
@@ -137,14 +141,35 @@ function GameInProgressComponent() {
                         spacing={3}
                       >
                         <Grid item>
-                          <Button variant="outlined">Kill</Button>
+                          <Button
+                            variant="outlined"
+                            onClick={() => {
+                              handleEndOfRoundRequest("KILL");
+                            }}
+                          >
+                            Kill
+                          </Button>
                         </Grid>
                         <Grid item>
-                          <Button variant="outlined">Call</Button>
+                          <Button
+                            variant="outlined"
+                            onClick={() => {
+                              handleEndOfRoundRequest("CALL");
+                            }}
+                          >
+                            Call
+                          </Button>
                         </Grid>
                       </Grid>
                       <Grid item>
-                        <Button variant="outlined">Spot</Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => {
+                            handleEndOfRoundRequest("SPOT ON");
+                          }}
+                        >
+                          Spot
+                        </Button>
                       </Grid>
                     </Grid>
                   </StyledPaper>
