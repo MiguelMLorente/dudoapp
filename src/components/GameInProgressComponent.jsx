@@ -32,10 +32,6 @@ function GameInProgressComponent() {
       .shift()
   );
 
-  const handleActivePlayerUpdateName = (newName) => {
-    setActivePlayer({ ...activePlayer, playerName: newName });
-  };
-
   useEffect(() => {
     setSelfInfo(
       playersInfo
@@ -55,6 +51,10 @@ function GameInProgressComponent() {
   }, [playersInfo, userName]);
 
   useEffect(() => {
+    const handleActivePlayerUpdateName = (newName) => {
+      setActivePlayer({ ...activePlayer, playerName: newName });
+    };
+
     if (activePlayer.playerName === userName) {
       handleActivePlayerUpdateName("You");
     }
