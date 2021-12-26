@@ -8,6 +8,7 @@ import NewRoomComponent from "./components/newRoomComponent";
 import LobbyComponent from "./components/LobbyComponent";
 import GameInProgressComponent from "./components/GameInProgressComponent";
 import HelpComponent from "./components/HelpComponent";
+import EndOfRoundComponent from "./components/InGameComponents/EndOfRoundComponent";
 
 function App() {
   let currentComponent = useSelector((state) => state.appStatus.component);
@@ -22,6 +23,8 @@ function App() {
         return <NewRoomComponent />;
       case "GameInProgress":
         return <GameInProgressComponent />;
+      case "EndOfRound":
+        return <EndOfRoundComponent/>
     }
   };
 

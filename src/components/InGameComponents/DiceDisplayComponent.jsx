@@ -20,13 +20,16 @@ function DiceDisplayComponent(props) {
       <StyledPaper elevation={3}>
         <div className={variantClassName}>
           <Grid container justifyContent="center" spacing={3}>
-            {props.diceValues.map((value) => {
-              return (
-                <Grid item key={uuid4()}>
-                  {valueToDiceIcon(value)}
-                </Grid>
-              );
-            })}
+            {props.playerName ? <Grid item>{props.playerName}</Grid> : ""}
+            {props.diceValues
+              ? props.diceValues.map((value) => {
+                  return (
+                    <Grid item key={uuid4()}>
+                      {valueToDiceIcon(value)}
+                    </Grid>
+                  );
+                })
+              : ""}
           </Grid>
         </div>
       </StyledPaper>

@@ -8,6 +8,7 @@ import {
   updateUserID,
 } from "./actions/gameDataActions";
 import {
+  changeToEndOfRound,
   changeToGameInProgress,
   changeToJoinRoom,
   changeToLoby,
@@ -131,6 +132,10 @@ const WebSocketProvider = ({ children }) => {
       dispatch(updateGameStatus(data));
       dispatch(changeToGameInProgress());
     });
+    socket.on('end-of-round', (data)=>{
+      dispatch(updateGameStatus(data))
+      dispatch(changeToEndOfRound())
+    })
     socket.on("kicked-player", () => {
       //This case is special, the server only sends
       // an empty string, so we pass the bool to the store.

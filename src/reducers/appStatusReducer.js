@@ -18,6 +18,8 @@ const appStatusReducer = (state = initState, action) => {
       return { ...state, component: "GameInProgress" };
     case "UPDATE_KICKED_STATUS":
       return { ...state, userKicked: payload };
+    case "END_OF_ROUND":
+      return {...state, component: "EndOfRound"}
   }
 };
 

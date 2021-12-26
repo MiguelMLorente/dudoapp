@@ -22,6 +22,12 @@ export const changeToGameInProgress = () => (dispatch) => {
   });
 };
 
+export const changeToEndOfRound = () => (dispatch) => {
+  dispatch({
+    type: 'END_OF_ROUND'
+  })  
+}
+
 export const updateKickStatus = (newBool) => (dispatch) => {
   dispatch({
     type: "UPDATE_KICKED_STATUS",
