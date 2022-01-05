@@ -1,21 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { WebSocketContext } from "../WebSocket";
 import styled from "styled-components";
-import { Button, Grid, Paper, Typography, Divider } from "@mui/material";
+import { Grid, Paper, Typography, Divider } from "@mui/material";
 import LogoComponent from "./LogoComponent";
 import BidDisplayComponent from "./InGameComponents/BidDisplayComponent";
 import DiceDisplayComponent from "./InGameComponents/DiceDisplayComponent";
-import DiceSelector from "./InGameComponents/DiceSelector";
+import ButtonField from "./InGameComponents/ButtonField";
 
 function GameInProgressComponent() {
-  const ws = useContext(WebSocketContext);
-  const gameUuid = useSelector((state) => state.gameData.gameId);
-  const userUuid = useSelector((state) => state.gameData.userId);
   const userName = useSelector((state) => state.gameData.name);
   let currentBid = useSelector((state) => state.gameStatus.currentBid);
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
-  let bidSelector = useSelector((state) => state.gameStatus.bidSelector);
 
   let [selfInfo, setSelfInfo] = useState(
     playersInfo
@@ -59,19 +54,6 @@ function GameInProgressComponent() {
       handleActivePlayerUpdateName("You");
     }
   }, [activePlayer, userName]);
-
-  const handleBid = () => {
-    ws.sendBidRequest(
-      userUuid,
-      gameUuid,
-      bidSelector.diceNumber,
-      bidSelector.diceValue
-    );
-  };
-
-  const handleEndOfRoundRequest = (actionType) => {
-    ws.sendEndOfRoundRequest(userUuid, actionType, gameUuid);
-  };
 
   return (
     <React.Fragment>
@@ -122,57 +104,7 @@ function GameInProgressComponent() {
                   <Divider />
                 </Grid>
                 <Grid item>
-                  <StyledPaper elevation={3}>
-                    <Grid container justifyContent="center">
-                      <Grid container item justifyContent="space-around">
-                        <StyledButtonGrid item>
-                          <Button variant="outlined" onClick={handleBid}>
-                            Bid
-                          </Button>
-                        </StyledButtonGrid>
-                        <Grid item>
-                          <DiceSelector />
-                        </Grid>
-                      </Grid>
-                      <Grid
-                        container
-                        item
-                        justifyContent="space-around"
-                        spacing={3}
-                      >
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => {
-                              handleEndOfRoundRequest("KILL");
-                            }}
-                          >
-                            Kill
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button
-                            variant="outlined"
-                            onClick={() => {
-                              handleEndOfRoundRequest("CALL");
-                            }}
-                          >
-                            Call
-                          </Button>
-                        </Grid>
-                      </Grid>
-                      <Grid item>
-                        <Button
-                          variant="outlined"
-                          onClick={() => {
-                            handleEndOfRoundRequest("SPOT ON");
-                          }}
-                        >
-                          Spot
-                        </Button>
-                      </Grid>
-                    </Grid>
-                  </StyledPaper>
+                  <ButtonField />
                 </Grid>
               </Grid>
             </StyledPaper>
@@ -191,8 +123,5 @@ const StyledPaper = styled(Paper)`
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;
-`;
-const StyledButtonGrid = styled(Grid)`
-  padding-top: 1.6rem;
 `;
 export default GameInProgressComponent;
