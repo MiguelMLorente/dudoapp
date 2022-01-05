@@ -64,8 +64,8 @@ function GameInProgressComponent() {
     ws.sendBidRequest(
       userUuid,
       gameUuid,
-      bidSelector.diceValue,
-      bidSelector.diceNumber
+      bidSelector.diceNumber,
+      bidSelector.diceValue
     );
   };
 
