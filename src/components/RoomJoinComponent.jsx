@@ -31,8 +31,10 @@ function RoomJoinComponent() {
     "Looks like this room has a password"
   );
   let [roomIdHelperText, setRoomIdHelperText] = useState("");
+  let [userNameHelperText, setUsernameHelperText] = useState("");
   let [triedToJoin, setTriedToJoin] = useState(false);
   let [gameNotFound, setGameNotFound] = useState(false);
+  let [duplicateUser, setDuplicateUser] = useState(false);
 
   const userNameHandler = (e) => {
     setUserName(e.target.value);
@@ -100,6 +102,10 @@ function RoomJoinComponent() {
       setRoomIdHelperText("");
       setGameNotFound(false);
     }
+    if (error === "User name is already under use") {
+      setUsernameHelperText("User name is already in use");
+      setDuplicateUser(true);
+    }
   }, [error]);
 
   return (
@@ -133,6 +139,8 @@ function RoomJoinComponent() {
                     label="Username"
                     value={userName}
                     onChange={userNameHandler}
+                    error={duplicateUser}
+                    helperText={userNameHelperText}
                   />
                 </Grid>
                 <Grid item>
