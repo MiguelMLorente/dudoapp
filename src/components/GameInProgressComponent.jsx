@@ -100,12 +100,18 @@ function GameInProgressComponent() {
                     isPlaying
                   />
                 </Grid>
-                <Grid item>
-                  <Divider />
-                </Grid>
-                <Grid item>
-                  <ButtonField />
-                </Grid>
+                {activePlayer.playerName === "You" ? (
+                  <React.Fragment>
+                    <Grid item>
+                      <Divider />
+                    </Grid>
+                    <Grid item>
+                      <ButtonField />
+                    </Grid>
+                  </React.Fragment>
+                ) : (
+                  ""
+                )}
               </Grid>
             </StyledPaper>
           </Grid>
