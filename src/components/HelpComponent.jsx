@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Typography,
 } from "@mui/material";

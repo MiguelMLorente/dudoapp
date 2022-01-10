@@ -17,14 +17,13 @@ function EndOfRoundComponent() {
                 container
                 direction="column"
                 justifyContent="center"
-                spacing={3}
+                spacing={5}
                 className="EndOfRoundContainer"
               >
                 {playersInfo.map((player) => {
-                  console.log(player);
                   return (
                     <Grid item key={player.playerName}>
-                      <DiceDisplayComponent
+                      <StyledDiceDisplayComponent
                         playerName={player.playerName}
                         diceValues={player.diceValue}
                         variant="small"
@@ -40,6 +39,8 @@ function EndOfRoundComponent() {
     </React.Fragment>
   );
 }
+
+const StyledDiceDisplayComponent = styled(DiceDisplayComponent)``;
 
 const StyledPaper = styled(Paper)`
   padding: 2rem;
