@@ -22,11 +22,13 @@ function EndOfRoundComponent() {
   let totalBidDieNumber = 0;
 
   playersInfo.forEach((player) => {
-    player.diceValue.forEach((die) => {
-      if (die === currentBid.diceValue || die === 1) {
-        totalBidDieNumber += 1;
-      }
-    });
+    if (player.diceValue) {
+      player.diceValue.forEach((die) => {
+        if (die === currentBid.diceValue || die === 1) {
+          totalBidDieNumber += 1;
+        }
+      });
+    }
   });
 
   const looserWinnerDisplay = (action) => {
