@@ -19,17 +19,24 @@ function DiceDisplayComponent(props) {
     <React.Fragment>
       <StyledPaper elevation={3}>
         <div className={variantClassName}>
-          <Grid container justifyContent="center" spacing={3}>
+          <Grid
+            container
+            justifyContent="center"
+            spacing={3}
+            direction="column"
+          >
             {props.playerName ? <Grid item>{props.playerName}</Grid> : ""}
-            {props.diceValues
-              ? props.diceValues.map((value) => {
-                  return (
-                    <Grid item key={uuid4()}>
-                      {valueToDiceIcon(value)}
-                    </Grid>
-                  );
-                })
-              : ""}
+            <Grid item container justifyContent="center" spacing={3}>
+              {props.diceValues
+                ? props.diceValues.map((value) => {
+                    return (
+                      <Grid item key={uuid4()}>
+                        {valueToDiceIcon(value)}
+                      </Grid>
+                    );
+                  })
+                : ""}
+            </Grid>
           </Grid>
         </div>
       </StyledPaper>
@@ -43,7 +50,10 @@ const StyledPaper = styled(Paper)`
     font-size: 2rem;
   }
   .small-dice {
-    /* TODO: ADD CSS FOR END OF ROUND DICE */
+    .diceIcon {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
   }
 `;
 

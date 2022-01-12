@@ -39,14 +39,14 @@ function EndOfRoundComponent() {
               >
                 {" "}
                 <Grid item>
-                  <Typography>{requesterName}: </Typography>
+                  <Typography variant="h5">{requesterName} bidded: </Typography>
                 </Grid>
                 <Grid item>
                   <StyledPaper elevation={2}>
                     <Grid container item>
                       <Grid container item direction="column" xs={6}>
                         <Grid item>{action}</Grid>
-                        <Grid
+                        <StyledDieAction
                           container
                           item
                           justifyContent="center"
@@ -59,11 +59,11 @@ function EndOfRoundComponent() {
                             <FontAwesomeIcon icon={faTimes} />
                           </Grid>
                           <Grid item>{currentBid.diceNumber}</Grid>
-                        </Grid>
+                        </StyledDieAction>
                       </Grid>
                       <Grid container item direction="column" xs={6}>
-                        <Grid item>Actual</Grid>
-                        <Grid
+                        <Grid item>There were</Grid>
+                        <StyledDieAction
                           container
                           item
                           justifyContent="center"
@@ -76,7 +76,7 @@ function EndOfRoundComponent() {
                             <FontAwesomeIcon icon={faTimes} />
                           </Grid>
                           <Grid item>{totalBidDieNumber}</Grid>
-                        </Grid>
+                        </StyledDieAction>
                       </Grid>
                     </Grid>
                   </StyledPaper>
@@ -110,6 +110,9 @@ const StyledContainer = styled.div`
 `;
 const StyledGrid = styled(Grid)`
   justify-content: center;
+`;
+const StyledDieAction = styled(Grid)`
+  font-size: 2rem;
 `;
 
 export default EndOfRoundComponent;
