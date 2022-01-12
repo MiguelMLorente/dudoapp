@@ -1,11 +1,16 @@
 import React from "react";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Divider, Grid, Paper, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import DiceDisplayComponent from "./DiceDisplayComponent";
 import { valueToDiceIcon } from "./utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown,
+  faArrowUp,
+  faDice,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 function EndOfRoundComponent() {
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
@@ -23,6 +28,42 @@ function EndOfRoundComponent() {
       }
     });
   });
+
+  const looserWinnerDisplay = (action) => {
+    switch (action) {
+      case "CALL":
+      case "KILL":
+        return (
+          <Grid item container justifyContent="center" spacing={3}>
+            <Grid item>
+              <Typography>{loserName} looses a dice</Typography>
+            </Grid>
+            <Grid item>
+              <FontAwesomeIcon icon={faDice} />
+            </Grid>
+            <Grid item>
+              <FontAwesomeIcon icon={faArrowDown} />
+            </Grid>
+          </Grid>
+        );
+      case "SPOT ON":
+        return (
+          <Grid item container justifyContent="center" spacing={3}>
+            <Grid item>
+              <Typography>{winnerName} wins a dice</Typography>
+            </Grid>
+            <Grid item>
+              <FontAwesomeIcon icon={faDice} />
+            </Grid>
+            <Grid item>
+              <FontAwesomeIcon icon={faArrowUp} />
+            </Grid>
+          </Grid>
+        );
+      default:
+        return "";
+    }
+  };
 
   return (
     <React.Fragment>
@@ -80,6 +121,13 @@ function EndOfRoundComponent() {
                       </Grid>
                     </Grid>
                   </StyledPaper>
+                  <Grid item>
+                    <Divider />
+                  </Grid>
+                  {looserWinnerDisplay(action)}
+                  <Grid item>
+                    <Divider />
+                  </Grid>
                 </Grid>
                 {playersInfo.map((player) => {
                   return (
