@@ -41,7 +41,7 @@ function RoomJoinComponent() {
   };
 
   const roomIDHandler = (e) => {
-    setRoomID(e.target.value);
+    setRoomID(e.target.value.replace(/\s/g, ""));
   };
 
   const handleKeyPress = (e) => {
