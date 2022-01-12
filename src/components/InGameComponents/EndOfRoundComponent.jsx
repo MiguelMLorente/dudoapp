@@ -3,7 +3,9 @@ import { Grid, Paper, Typography } from "@mui/material";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import DiceDisplayComponent from "./DiceDisplayComponent";
-import { red } from "@mui/material/colors";
+import { valueToDiceIcon } from "./utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function EndOfRoundComponent() {
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
@@ -11,6 +13,16 @@ function EndOfRoundComponent() {
   let winnerName = useSelector((state) => state.gameStatus.winnerName);
   let loserName = useSelector((state) => state.gameStatus.loserName);
   let action = useSelector((state) => state.gameStatus.action);
+  let currentBid = useSelector((state) => state.gameStatus.currentBid);
+  let totalBidDieNumber = 0;
+
+  playersInfo.forEach((player) => {
+    player.diceValue.forEach((die) => {
+      if (die === currentBid.diceValue || die === 1) {
+        totalBidDieNumber += 1;
+      }
+    });
+  });
 
   return (
     <React.Fragment>
@@ -34,16 +46,36 @@ function EndOfRoundComponent() {
                     <Grid container item>
                       <Grid container item direction="column" xs={6}>
                         <Grid item>{action}</Grid>
-                        <Grid container item justifyContent="center">
-                          <Grid item>val</Grid>
-                          <Grid item>num</Grid>
+                        <Grid
+                          container
+                          item
+                          justifyContent="center"
+                          spacing={2}
+                        >
+                          <Grid item>
+                            {valueToDiceIcon(currentBid.diceValue)}
+                          </Grid>
+                          <Grid item>
+                            <FontAwesomeIcon icon={faTimes} />
+                          </Grid>
+                          <Grid item>{currentBid.diceNumber}</Grid>
                         </Grid>
                       </Grid>
                       <Grid container item direction="column" xs={6}>
                         <Grid item>Actual</Grid>
-                        <Grid container item justifyContent="center">
-                          <Grid item>val</Grid>
-                          <Grid item>num</Grid>
+                        <Grid
+                          container
+                          item
+                          justifyContent="center"
+                          spacing={2}
+                        >
+                          <Grid item>
+                            {valueToDiceIcon(currentBid.diceValue)}
+                          </Grid>
+                          <Grid item>
+                            <FontAwesomeIcon icon={faTimes} />
+                          </Grid>
+                          <Grid item>{totalBidDieNumber}</Grid>
                         </Grid>
                       </Grid>
                     </Grid>
