@@ -22,7 +22,7 @@ function EndOfRoundComponent() {
   let totalBidDieNumber = 0;
 
   playersInfo.forEach((player) => {
-    if (player.diceValue) {
+    if (player.diceValue && currentBid) {
       player.diceValue.forEach((die) => {
         if (die === currentBid.diceValue || die === 1) {
           totalBidDieNumber += 1;
@@ -89,37 +89,45 @@ function EndOfRoundComponent() {
                     <Grid container item>
                       <Grid container item direction="column" xs={6}>
                         <Grid item>{action}</Grid>
-                        <StyledDieAction
-                          container
-                          item
-                          justifyContent="center"
-                          spacing={2}
-                        >
-                          <Grid item>
-                            {valueToDiceIcon(currentBid.diceValue)}
-                          </Grid>
-                          <Grid item>
-                            <FontAwesomeIcon icon={faTimes} />
-                          </Grid>
-                          <Grid item>{currentBid.diceNumber}</Grid>
-                        </StyledDieAction>
+                        {currentBid ? (
+                          <StyledDieAction
+                            container
+                            item
+                            justifyContent="center"
+                            spacing={2}
+                          >
+                            <Grid item>
+                              {valueToDiceIcon(currentBid.diceValue)}
+                            </Grid>
+                            <Grid item>
+                              <FontAwesomeIcon icon={faTimes} />
+                            </Grid>
+                            <Grid item>{currentBid.diceNumber}</Grid>
+                          </StyledDieAction>
+                        ) : (
+                          ""
+                        )}
                       </Grid>
                       <Grid container item direction="column" xs={6}>
                         <Grid item>There were</Grid>
-                        <StyledDieAction
-                          container
-                          item
-                          justifyContent="center"
-                          spacing={2}
-                        >
-                          <Grid item>
-                            {valueToDiceIcon(currentBid.diceValue)}
-                          </Grid>
-                          <Grid item>
-                            <FontAwesomeIcon icon={faTimes} />
-                          </Grid>
-                          <Grid item>{totalBidDieNumber}</Grid>
-                        </StyledDieAction>
+                        {currentBid ? (
+                          <StyledDieAction
+                            container
+                            item
+                            justifyContent="center"
+                            spacing={2}
+                          >
+                            <Grid item>
+                              {valueToDiceIcon(currentBid.diceValue)}
+                            </Grid>
+                            <Grid item>
+                              <FontAwesomeIcon icon={faTimes} />
+                            </Grid>
+                            <Grid item>{totalBidDieNumber}</Grid>
+                          </StyledDieAction>
+                        ) : (
+                          ""
+                        )}
                       </Grid>
                     </Grid>
                   </StyledPaper>
