@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogContentText,
   DialogContent,
+  DialogActions,
 } from "@mui/material";
 import LogoComponent from "./LogoComponent";
 import { useDispatch, useSelector } from "react-redux";
@@ -112,15 +113,16 @@ function RoomJoinComponent() {
     <React.Fragment>
       <StyledContainer>
         <Dialog open={userKicked} onClose={handleClose}>
-          <DialogTitle id="modal-modal-title" variant="h6" component="h2">
-            You have been kicked
-          </DialogTitle>
           <DialogContent>
             <DialogContentText id="modal-modal-description" sx={{ mt: 2 }}>
-              Sorry, you have been kicked by the admin of the room, click
-              outside this box to continue
+              You have been kicked by the admin of the room
             </DialogContentText>
           </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} autoFocus>
+              Ok
+            </Button>
+          </DialogActions>
         </Dialog>
         <StyledGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
