@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Grid, Paper } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,7 +14,19 @@ import { updateBidSelector } from "../../actions/gameStatusActions";
 
 function DiceSelector() {
   let bidSelector = useSelector((state) => state.gameStatus.bidSelector);
+  let currentBid = useSelector((state) => state.gameStatus.currentBid);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (currentBid) {
+      let payload = {
+        diceValue: currentBid.diceValue,
+        diceNumber: currentBid.diceNumber,
+      };
+
+      dispatch(updateBidSelector(payload));
+    }
+  }, [currentBid, dispatch]);
 
   const handleDiceValueChange = (signIndicator) => {
     let targetValue = (bidSelector.diceValue + signIndicator) % 6;
