@@ -11,6 +11,7 @@ import {
   faDice,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import SpecialRoundComponent from "./SpecialRoundComponent";
 
 function EndOfRoundComponent() {
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
@@ -73,6 +74,7 @@ function EndOfRoundComponent() {
         <StyledGrid container>
           <Grid item xs={12} sm={10} md={8}>
             <StyledPaper elevation={1}>
+              <SpecialRoundComponent />
               <Grid
                 container
                 direction="column"
@@ -80,7 +82,6 @@ function EndOfRoundComponent() {
                 spacing={5}
                 className="EndOfRoundContainer"
               >
-                {" "}
                 <Grid item>
                   <Typography variant="h5">{requesterName} bidded: </Typography>
                 </Grid>

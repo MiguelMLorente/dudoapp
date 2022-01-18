@@ -14,7 +14,7 @@ import {
   changeToLoby,
   updateKickStatus,
 } from "./actions/appStatusActions";
-import { updateGameStatus } from "./actions/gameStatusActions";
+import { updateBidSelector, updateGameStatus } from "./actions/gameStatusActions";
 
 const WebSocketContext = createContext(null);
 
@@ -115,6 +115,20 @@ const WebSocketProvider = ({ children }) => {
     socket.emit('action', payload)
   }
 
+  const selectSpecialRound = (userUuid, requestedOption, gameUuid) => {
+    const payload = {
+      requester : {
+        uuid : userUuid
+      },
+      actionType : "SELECT OPTION",
+      actionData : {
+        gameId : gameUuid,
+        selectedOption : requestedOption
+      }
+    }
+    socket.emit('action', payload)
+  }
+
   if (!socket) {
     socket = io("ws://localhost:8081");
 
@@ -133,8 +147,17 @@ const WebSocketProvider = ({ children }) => {
       dispatch(changeToGameInProgress());
     });
     socket.on('end-of-round', (data)=>{
-      dispatch(updateGameStatus(data))
-      dispatch(changeToEndOfRound())
+      //this includes end of round state cleanup
+      dispatch(updateGameStatus(data));
+      dispatch(changeToEndOfRound());
+      dispatch(updateBidSelector({
+        diceValue: 1,
+        diceNumber: 1,
+      }));
+      dispatch(updateGameStatus({specialRound : null}))
+    });
+    socket.on('select-option', (data)=>{
+      dispatch(updateGameStatus({specialRound : data}))
     })
     socket.on("kicked-player", () => {
       //This case is special, the server only sends
@@ -154,6 +177,7 @@ const WebSocketProvider = ({ children }) => {
       sendKickRequest,
       sendBidRequest,
       sendEndOfRoundRequest,
+      selectSpecialRound,
     };
   }
   return (

@@ -6,7 +6,6 @@ import {
   Button,
   Paper,
   Dialog,
-  DialogTitle,
   DialogContentText,
   DialogContent,
   DialogActions,
