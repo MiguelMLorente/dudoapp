@@ -112,6 +112,28 @@ function GameInProgressComponent() {
                 ) : (
                   ""
                 )}
+                <Grid item>
+                  <Divider />
+                </Grid>
+                <Grid item container direction="column" spacing={4}>
+                  {playersInfo.map((player) => {
+                    if (
+                      player.isAlive &&
+                      player.diceValue &&
+                      !(player.playerName === userName)
+                    ) {
+                      return (
+                        <Grid item key={player.playerName} s={12}>
+                          <DiceDisplayComponent
+                            playerName={player.playerName}
+                            diceValues={player.diceValue}
+                            variant="small"
+                          />
+                        </Grid>
+                      );
+                    } else return null;
+                  })}
+                </Grid>
               </Grid>
             </StyledPaper>
           </Grid>
