@@ -84,14 +84,18 @@ function EndOfRoundComponent() {
         <StyledGrid container>
           <Grid item xs={12} sm={10} md={8}>
             <StyledPaper elevation={1}>
-              <Dialog open={endOfGame}>
-                <DialogTitle>{endOfGame.winner} won!</DialogTitle>
-                <DialogContent>
-                  <DialogContentText>
-                    Refresh to create a new room and play again
-                  </DialogContentText>
-                </DialogContent>
-              </Dialog>
+              {endOfGame ? (
+                <Dialog open={endOfGame}>
+                  <DialogTitle>{endOfGame.winner} won!</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      Refresh to create a new room and play again
+                    </DialogContentText>
+                  </DialogContent>
+                </Dialog>
+              ) : (
+                ""
+              )}
               <SpecialRoundComponent />
               <Grid
                 container
