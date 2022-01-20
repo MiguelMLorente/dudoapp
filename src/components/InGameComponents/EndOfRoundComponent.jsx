@@ -1,5 +1,14 @@
 import React from "react";
-import { Divider, Grid, Paper, Typography } from "@mui/material";
+import {
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import DiceDisplayComponent from "./DiceDisplayComponent";
@@ -20,6 +29,7 @@ function EndOfRoundComponent() {
   let loserName = useSelector((state) => state.gameStatus.loserName);
   let action = useSelector((state) => state.gameStatus.action);
   let currentBid = useSelector((state) => state.gameStatus.currentBid);
+  let endOfGame = useSelector((state) => state.gameStatus.endOfGame);
   let totalBidDieNumber = 0;
 
   playersInfo.forEach((player) => {
@@ -74,6 +84,14 @@ function EndOfRoundComponent() {
         <StyledGrid container>
           <Grid item xs={12} sm={10} md={8}>
             <StyledPaper elevation={1}>
+              <Dialog open={endOfGame}>
+                <DialogTitle>{endOfGame.winner} won!</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Refresh to create a new room and play again
+                  </DialogContentText>
+                </DialogContent>
+              </Dialog>
               <SpecialRoundComponent />
               <Grid
                 container

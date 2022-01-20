@@ -70,8 +70,14 @@ function GameInProgressComponent() {
                 className="dashBoard"
               >
                 <Grid item>
-                  <Typography>Your Dice </Typography>
-                  <DiceDisplayComponent diceValues={selfInfo.diceValue} />
+                  {selfInfo.isAlive ? (
+                    <React.Fragment>
+                      <Typography>Your Dice </Typography>
+                      <DiceDisplayComponent diceValues={selfInfo.diceValue} />
+                    </React.Fragment>
+                  ) : (
+                    <Typography variant="h4">You lost</Typography>
+                  )}
                 </Grid>
                 <Grid item>
                   <Divider />

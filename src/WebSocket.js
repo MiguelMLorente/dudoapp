@@ -159,6 +159,9 @@ const WebSocketProvider = ({ children }) => {
     socket.on('select-option', (data)=>{
       dispatch(updateGameStatus({specialRound : data}))
     })
+    socket.on('end-of-game', (data) => {
+      dispatch(updateGameStatus({endOfGame : data}))
+    })
     socket.on("kicked-player", () => {
       //This case is special, the server only sends
       // an empty string, so we pass the bool to the store.
