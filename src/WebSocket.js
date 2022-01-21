@@ -130,7 +130,7 @@ const WebSocketProvider = ({ children }) => {
   }
 
   if (!socket) {
-    socket = io("ws://localhost:8081");
+    socket = io("http://micodev.ddns.net:8082");
 
     socket.on("new-user", (data) => {
       dispatch(updateUserID(data));
