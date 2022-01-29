@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import GlobalStyle from "./globalStyles";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import RoomJoinComponent from "./components/RoomJoinComponent";
@@ -12,6 +11,7 @@ import EndOfRoundComponent from "./components/InGameComponents/EndOfRoundCompone
 
 function App() {
   let currentComponent = useSelector((state) => state.appStatus.component);
+  let theme = useSelector((state) => state.theme);
 
   const componentHandler = (selectedComponent) => {
     switch (selectedComponent) {
@@ -24,18 +24,17 @@ function App() {
       case "GameInProgress":
         return <GameInProgressComponent />;
       case "EndOfRound":
-        return <EndOfRoundComponent/>
+        return <EndOfRoundComponent />;
     }
   };
 
   return (
     <React.Fragment key="App">
-      <GlobalStyle />
-      <StyledGrid container>
-        <StyledGrid item xs={12} sm={10} md={8} lg={6}>
+      <StyledGrid container themes={theme}>
+        <Grid item xs={12} sm={10} md={8} lg={6}>
           {componentHandler(currentComponent)}
-          <StyledHelpComponent />
-        </StyledGrid>
+          <HelpComponent />
+        </Grid>
       </StyledGrid>
     </React.Fragment>
   );
@@ -44,6 +43,7 @@ function App() {
 const StyledGrid = styled(Grid)`
   justify-content: center;
   text-align: center;
+  background-color: ${(props) => props.themes.colors.appBackground};
+  height: ${(props) => props.themes.sizes.windowHeight + "px"};
 `;
-const StyledHelpComponent = styled(HelpComponent)``;
 export default App;

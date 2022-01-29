@@ -3,6 +3,7 @@ import { Grid, Paper } from "@mui/material";
 import styled from "styled-components";
 import { v4 as uuid4 } from "uuid";
 import { valueToDiceIcon } from "./utils";
+import { useSelector } from "react-redux";
 
 function DiceDisplayComponent(props) {
   let variantClassName = "";
@@ -14,11 +15,12 @@ function DiceDisplayComponent(props) {
       variantClassName = "small-dice";
       break;
   }
+  let theme = useSelector((state) => state.theme);
 
   return (
     <React.Fragment>
       <StyledPaper elevation={3}>
-        <div className={variantClassName}>
+        <StyledDiv className={variantClassName} themes={theme}>
           <Grid
             container
             justifyContent="center"
@@ -38,7 +40,7 @@ function DiceDisplayComponent(props) {
                 : ""}
             </Grid>
           </Grid>
-        </div>
+        </StyledDiv>
       </StyledPaper>
     </React.Fragment>
   );
@@ -56,5 +58,9 @@ const StyledPaper = styled(Paper)`
     }
   }
 `;
-
+const StyledDiv = styled('div')`
+  border-radius: 4px;
+  background-color: ${(props) => props.themes.colors.paper2};
+  color: ${(props) => props.themes.colors.text};
+`;
 export default DiceDisplayComponent;

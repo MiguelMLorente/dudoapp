@@ -35,7 +35,7 @@ function RoomJoinComponent() {
   let [triedToJoin, setTriedToJoin] = useState(false);
   let [gameNotFound, setGameNotFound] = useState(false);
   let [duplicateUser, setDuplicateUser] = useState(false);
-
+  let theme = useSelector((state) => state.theme);
   const userNameHandler = (e) => {
     setUserName(e.target.value);
   };
@@ -75,6 +75,7 @@ function RoomJoinComponent() {
           onChange={passwordHandler}
           helperText={passwordHelperText}
           error={triedToJoin}
+          sx={{ input: { color: theme.colors.text } }}
         />
       </Grid>
     );
@@ -125,7 +126,7 @@ function RoomJoinComponent() {
         </Dialog>
         <StyledGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
-            <StyledPaper>
+            <Paper style={{padding: "2rem", backgroundColor: theme.colors.background}}>
               <LogoComponent />
               <Grid
                 container
@@ -142,6 +143,7 @@ function RoomJoinComponent() {
                     onChange={userNameHandler}
                     error={duplicateUser}
                     helperText={userNameHelperText}
+                    sx={{ input: { color: theme.colors.text } }}
                   />
                 </Grid>
                 <Grid item>
@@ -154,6 +156,7 @@ function RoomJoinComponent() {
                     onChange={roomIDHandler}
                     onKeyPress={handleKeyPress}
                     autoFocus
+                    sx={{ input: { color: theme.colors.text } }}
                   />
                 </Grid>
                 {error === "Incorrect password, try again"
@@ -164,6 +167,7 @@ function RoomJoinComponent() {
                     variant="contained"
                     fullWidth={true}
                     onClick={joinRoomHandler}
+                    style={{backgroundColor: theme.colors.primary, color: theme.colors.text}}
                   >
                     Join Room
                   </Button>
@@ -173,21 +177,19 @@ function RoomJoinComponent() {
                     variant="contained"
                     fullWidth={true}
                     onClick={handleNewRoom}
+                      style={{backgroundColor: theme.colors.secondary, color: theme.colors.text}}
                   >
                     Create Room
                   </Button>
                 </Grid>
               </Grid>
-            </StyledPaper>
+            </Paper>
           </Grid>
         </StyledGrid>
       </StyledContainer>
     </React.Fragment>
   );
 }
-const StyledPaper = styled(Paper)`
-  padding: 2rem;
-`;
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;

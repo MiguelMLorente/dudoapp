@@ -12,6 +12,7 @@ function PlayerNameComponent(props) {
   const userUuid = useSelector((state) => state.gameData.userId);
   const gameUuid = useSelector((state) => state.gameData.gameId);
   let isAdmin = useSelector((state) => state.gameData.isAdmin);
+  let theme = useSelector((state) => state.theme);
 
   const kickHandler = () => {
     ws.sendKickRequest(userUuid, gameUuid, props.name);
@@ -29,11 +30,11 @@ function PlayerNameComponent(props) {
     }
   };
   return (
-    <Paper elevation={2} className={props.isReady ? "isReady" : ""}>
+    <Paper elevation={2} style={{backgroundColor: props.isReady ? theme.colors.name: theme.colors.textBackground }}>
       <Grid container justifyContent="space-between">
-        <Grid item>
+        <ColouredGrid item themes={theme}>
           <StyledTypography variant="h4">{props.name}</StyledTypography>
-        </Grid>
+        </ColouredGrid>
         {isAdmin ? kickDisplay() : ""}
       </Grid>
     </Paper>
@@ -49,5 +50,7 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
 const StyledTypography = styled(Typography)`
   padding-left: 1rem;
 `;
-
+const ColouredGrid = styled(Grid)`
+  color: ${(props) => props.themes.colors.text};
+`
 export default PlayerNameComponent;

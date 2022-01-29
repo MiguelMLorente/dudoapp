@@ -13,6 +13,7 @@ function LobbyComponent() {
   const gameUuid = useSelector((state) => state.gameData.gameId);
   let playerList = useSelector((state) => state.gameData.playerList);
   let [userReady, setUserReady] = useState(false);
+  let theme = useSelector((state) => state.theme);
 
   const readyHandler = () => {
     ws.sendReadyUpdate(userUuid, gameUuid, !userReady);
@@ -24,7 +25,7 @@ function LobbyComponent() {
       <StyledContainer>
         <StyledGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
-            <StyledPaper>
+            <Paper style={{padding: "2rem", backgroundColor: theme.colors.background}}>
               <LogoComponent variant="small" />
               <Grid
                 container
@@ -33,19 +34,19 @@ function LobbyComponent() {
                 spacing={3}
                 className="playerFields"
               >
-                <Grid item>
+                <ColouredGrid item themes={theme}>
                   <Typography variant="h5">Room: {roomId}</Typography>
-                </Grid>
+                </ColouredGrid>
                 <Grid item>
                   <Grid container justifyContent="space-between">
-                    <Grid item>
+                    <ColouredGrid item themes={theme}>
                       <Typography variant="h4">Players:</Typography>
-                    </Grid>
-                    <Grid item>
+                    </ColouredGrid>
+                    <ColouredGrid item themes={theme}>
                       <Typography variant="h4">
                         {playerList.length} / 8
                       </Typography>
-                    </Grid>
+                    </ColouredGrid>
                   </Grid>
                   <Divider />
                 </Grid>
@@ -67,6 +68,7 @@ function LobbyComponent() {
                     fullWidth={true}
                     variant="contained"
                     onClick={readyHandler}
+                    style={{backgroundColor: theme.colors.lightBox, color: theme.colors.text}}
                   >
                     {userReady ? "NOT READY" : "READY"}
                   </Button>
@@ -78,22 +80,19 @@ function LobbyComponent() {
                     }}
                     fullWidth={true}
                     variant="contained"
-                    color="secondary"
+                    style={{backgroundColor: theme.colors.tertiary, color: theme.colors.text}}
                   >
                     COPY ROOM CODE
                   </Button>
                 </Grid>
               </Grid>
-            </StyledPaper>
+            </Paper>
           </Grid>
         </StyledGrid>
       </StyledContainer>
     </React.Fragment>
   );
 }
-const StyledPaper = styled(Paper)`
-  padding: 2rem;
-`;
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;
@@ -101,5 +100,7 @@ const StyledContainer = styled.div`
 const StyledGrid = styled(Grid)`
   justify-content: center;
 `;
-
+const ColouredGrid = styled(Grid)`
+  color: ${(props) => props.themes.colors.text};
+`
 export default LobbyComponent;

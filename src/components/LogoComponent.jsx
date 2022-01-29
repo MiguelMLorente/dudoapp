@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDice } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 function LogoComponent(props) {
   let variantClassName = "";
+  let theme = useSelector((state) => state.theme);
   switch (props.variant) {
     default:
       variantClassName = "big-logo";
@@ -14,7 +16,7 @@ function LogoComponent(props) {
   }
 
   return (
-    <StyledLogo>
+    <StyledLogo themes={theme}>
       <div className={variantClassName}>
         <FontAwesomeIcon icon={faDice} />
         DUDOAPP
@@ -33,6 +35,7 @@ const StyledLogo = styled.div`
     font-size: 3rem;
     padding: 2rem 2rem;
   }
+  color: ${(props) => props.themes.colors.text};
 `;
 
 export default LogoComponent;

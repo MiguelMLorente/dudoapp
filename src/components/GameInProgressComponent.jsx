@@ -11,6 +11,7 @@ function GameInProgressComponent() {
   const userName = useSelector((state) => state.gameData.name);
   let currentBid = useSelector((state) => state.gameStatus.currentBid);
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
+  let theme = useSelector((state) => state.theme);
 
   let [selfInfo, setSelfInfo] = useState(
     playersInfo
@@ -60,7 +61,7 @@ function GameInProgressComponent() {
       <StyledContainer>
         <Grid container justifyContent="center">
           <Grid item s={12} sm={10} md={8} lg={6}>
-            <StyledPaper elevation={1}>
+            <StyledPaper elevation={1} style={{backgroundColor: theme.colors.background}}>
               <LogoComponent variant="small" />
               <Grid
                 container
@@ -69,7 +70,7 @@ function GameInProgressComponent() {
                 spacing={3}
                 className="dashBoard"
               >
-                <Grid item>
+                <ColouredGrid item themes={theme}>
                   {selfInfo.isAlive ? (
                     <React.Fragment>
                       <Typography>Your Dice </Typography>
@@ -78,20 +79,20 @@ function GameInProgressComponent() {
                   ) : (
                     <Typography variant="h4">You lost</Typography>
                   )}
-                </Grid>
+                </ColouredGrid>
                 <Grid item>
                   <Divider />
                 </Grid>
                 {currentBid ? (
                   <React.Fragment>
-                    <Grid item>
+                    <ColouredGrid item themes={theme}>
                       Current bid:
                       <BidDisplayComponent
                         name={currentBid.doneBy}
                         value={currentBid.diceValue}
                         number={currentBid.diceNumber}
                       />
-                    </Grid>
+                    </ColouredGrid>
                     <Grid item>
                       <Divider />
                     </Grid>
@@ -99,13 +100,14 @@ function GameInProgressComponent() {
                 ) : (
                   ""
                 )}
-                <Grid item>
+                <ColouredGrid item themes={theme}>
                   Now Playing:
-                  <BidDisplayComponent
-                    name={activePlayer.playerName}
-                    isPlaying
-                  />
-                </Grid>
+                  <StyledPaper elevation={2} style={{backgroundColor: theme.colors.paper2}}>
+                    <ColouredGrid container justifyContent="space-around" themes={theme}>
+                      <Grid item>{activePlayer.playerName}</Grid>
+                    </ColouredGrid>
+                  </StyledPaper>
+                </ColouredGrid>
                 {activePlayer.playerName === "You" ? (
                   <React.Fragment>
                     <Grid item>
@@ -150,10 +152,12 @@ function GameInProgressComponent() {
 }
 const StyledPaper = styled(Paper)`
   padding: 2rem;
-  button {
-    margin: 0.6rem;
-  }
+  font-size: 1.5rem;
+  border-radius: 6px;
 `;
+const ColouredGrid = styled(Grid)`
+  color: ${(props) => props.themes.colors.text};
+`
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;

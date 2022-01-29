@@ -18,6 +18,7 @@ function NewRoomComponent() {
     useSelector((state) => state.gameData.name)
   );
   let [password, setPassword] = useState("");
+  let theme = useSelector((state) => state.theme);
 
   const handleBack = () => {
     dispatch(updateUserName(userName));
@@ -39,7 +40,7 @@ function NewRoomComponent() {
       <StyledContainer>
         <StyledGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
-            <StyledPaper>
+            <Paper style={{padding: "2rem", backgroundColor: theme.colors.background }}>
               <LogoComponent />
               <Grid
                 container
@@ -54,6 +55,7 @@ function NewRoomComponent() {
                     label="Username"
                     value={userName}
                     onChange={userNameHandler}
+                    sx={{ input: { color: theme.colors.text } }}
                   />
                 </Grid>
                 <Grid item>
@@ -64,6 +66,7 @@ function NewRoomComponent() {
                     value={password}
                     onChange={passwordHandler}
                     helperText="Optional"
+                    sx={{ input: { color: theme.colors.text } }}
                   />
                 </Grid>
                 <Grid item>
@@ -72,6 +75,7 @@ function NewRoomComponent() {
                     fullWidth={true}
                     color="secondary"
                     onClick={submitHandler}
+                    style={{backgroundColor: theme.colors.primary, color: theme.colors.text}}
                   >
                     Create Room
                   </Button>
@@ -81,21 +85,19 @@ function NewRoomComponent() {
                     variant="contained"
                     fullWidth={true}
                     onClick={handleBack}
+                    style={{backgroundColor: theme.colors.secondary, color: theme.colors.text}}
                   >
                     BACK
                   </Button>
                 </Grid>
               </Grid>
-            </StyledPaper>
+            </Paper>
           </Grid>
         </StyledGrid>
       </StyledContainer>
     </React.Fragment>
   );
 }
-const StyledPaper = styled(Paper)`
-  padding: 2rem;
-`;
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;

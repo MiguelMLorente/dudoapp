@@ -15,6 +15,7 @@ import { updateBidSelector } from "../../actions/gameStatusActions";
 function DiceSelector() {
   let bidSelector = useSelector((state) => state.gameStatus.bidSelector);
   let currentBid = useSelector((state) => state.gameStatus.currentBid);
+  let theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,7 +50,7 @@ function DiceSelector() {
 
   return (
     <React.Fragment>
-      <StyledPaper elevation={1}>
+      <StyledPaper elevation={0} style={{backgroundColor: theme.colors.paper2, color: theme.colors.text}}>
         <Grid container wrap="nowrap" spacing={3}>
           <Grid container direction="column" item>
             <Grid item>
