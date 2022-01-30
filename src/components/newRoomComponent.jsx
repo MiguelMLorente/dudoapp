@@ -9,6 +9,7 @@ import {
   updateAdminPrivilege,
   updateUserName,
 } from "../actions/gameDataActions";
+import CenteredGrid from "./StyledComponents/CenteredGrid";
 
 function NewRoomComponent() {
   const ws = useContext(WebSocketContext);
@@ -38,7 +39,7 @@ function NewRoomComponent() {
   return (
     <React.Fragment>
       <StyledContainer>
-        <StyledGrid container>
+        <CenteredGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
             <Paper style={{padding: "2rem", backgroundColor: theme.colors.background }}>
               <LogoComponent />
@@ -93,7 +94,7 @@ function NewRoomComponent() {
               </Grid>
             </Paper>
           </Grid>
-        </StyledGrid>
+        </CenteredGrid>
       </StyledContainer>
     </React.Fragment>
   );
@@ -101,9 +102,6 @@ function NewRoomComponent() {
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;
-`;
-const StyledGrid = styled(Grid)`
-  justify-content: center;
 `;
 
 export default NewRoomComponent;

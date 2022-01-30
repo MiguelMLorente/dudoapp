@@ -5,6 +5,8 @@ import LogoComponent from "./LogoComponent";
 import PlayerNameComponent from "./PlayerNameComponent";
 import { useSelector } from "react-redux";
 import { WebSocketContext } from "../WebSocket";
+import CenteredGrid from "./StyledComponents/CenteredGrid";
+import StyledGrid from "./StyledComponents/StyledGrid";
 
 function LobbyComponent() {
   const ws = useContext(WebSocketContext);
@@ -23,7 +25,7 @@ function LobbyComponent() {
   return (
     <React.Fragment>
       <StyledContainer>
-        <StyledGrid container>
+        <CenteredGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
             <Paper style={{padding: "2rem", backgroundColor: theme.colors.background}}>
               <LogoComponent variant="small" />
@@ -34,19 +36,19 @@ function LobbyComponent() {
                 spacing={3}
                 className="playerFields"
               >
-                <ColouredGrid item themes={theme}>
+                <StyledGrid>
                   <Typography variant="h5">Room: {roomId}</Typography>
-                </ColouredGrid>
+                </StyledGrid>
                 <Grid item>
                   <Grid container justifyContent="space-between">
-                    <ColouredGrid item themes={theme}>
+                    <StyledGrid>
                       <Typography variant="h4">Players:</Typography>
-                    </ColouredGrid>
-                    <ColouredGrid item themes={theme}>
+                    </StyledGrid>
+                    <StyledGrid>
                       <Typography variant="h4">
                         {playerList.length} / 8
                       </Typography>
-                    </ColouredGrid>
+                    </StyledGrid>
                   </Grid>
                   <Divider />
                 </Grid>
@@ -88,7 +90,7 @@ function LobbyComponent() {
               </Grid>
             </Paper>
           </Grid>
-        </StyledGrid>
+        </CenteredGrid>
       </StyledContainer>
     </React.Fragment>
   );
@@ -97,10 +99,4 @@ const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;
 `;
-const StyledGrid = styled(Grid)`
-  justify-content: center;
-`;
-const ColouredGrid = styled(Grid)`
-  color: ${(props) => props.themes.colors.text};
-`
 export default LobbyComponent;

@@ -6,6 +6,7 @@ import LogoComponent from "./LogoComponent";
 import BidDisplayComponent from "./InGameComponents/BidDisplayComponent";
 import DiceDisplayComponent from "./InGameComponents/DiceDisplayComponent";
 import ButtonField from "./InGameComponents/ButtonField";
+import StyledGrid from "./StyledComponents/StyledGrid"
 
 function GameInProgressComponent() {
   const userName = useSelector((state) => state.gameData.name);
@@ -70,7 +71,7 @@ function GameInProgressComponent() {
                 spacing={3}
                 className="dashBoard"
               >
-                <ColouredGrid item themes={theme}>
+                <StyledGrid>
                   {selfInfo.isAlive ? (
                     <React.Fragment>
                       <Typography>Your Dice </Typography>
@@ -79,20 +80,20 @@ function GameInProgressComponent() {
                   ) : (
                     <Typography variant="h4">You lost</Typography>
                   )}
-                </ColouredGrid>
+                </StyledGrid>
                 <Grid item>
                   <Divider />
                 </Grid>
                 {currentBid ? (
                   <React.Fragment>
-                    <ColouredGrid item themes={theme}>
+                    <StyledGrid>
                       Current bid:
                       <BidDisplayComponent
                         name={currentBid.doneBy}
                         value={currentBid.diceValue}
                         number={currentBid.diceNumber}
                       />
-                    </ColouredGrid>
+                    </StyledGrid>
                     <Grid item>
                       <Divider />
                     </Grid>
@@ -100,14 +101,14 @@ function GameInProgressComponent() {
                 ) : (
                   ""
                 )}
-                <ColouredGrid item themes={theme}>
+                <StyledGrid>
                   Now Playing:
                   <StyledPaper elevation={2} style={{backgroundColor: theme.colors.paper2}}>
-                    <ColouredGrid container justifyContent="space-around" themes={theme}>
+                    <StyledGrid container justifyContent="space-around">
                       <Grid item>{activePlayer.playerName}</Grid>
-                    </ColouredGrid>
+                    </StyledGrid>
                   </StyledPaper>
-                </ColouredGrid>
+                </StyledGrid>
                 {activePlayer.playerName === "You" ? (
                   <React.Fragment>
                     <Grid item>
@@ -155,9 +156,6 @@ const StyledPaper = styled(Paper)`
   font-size: 1.5rem;
   border-radius: 6px;
 `;
-const ColouredGrid = styled(Grid)`
-  color: ${(props) => props.themes.colors.text};
-`
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;

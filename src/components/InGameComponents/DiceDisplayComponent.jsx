@@ -59,7 +59,7 @@ const StyledPaper = styled(Paper)`
   }
 `;
 const StyledDiv = styled('div')`
-  border-radius: 4px;
+  border-radius:2px;
   background-color: ${(props) => props.themes.colors.paper2};
   color: ${(props) => props.themes.colors.text};
 `;

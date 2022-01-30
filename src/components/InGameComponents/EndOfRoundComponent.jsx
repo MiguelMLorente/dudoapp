@@ -21,6 +21,8 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import SpecialRoundComponent from "./SpecialRoundComponent";
+import CenteredGrid from "../StyledComponents/CenteredGrid";
+import StyledGrid from "../StyledComponents/StyledGrid";
 
 function EndOfRoundComponent() {
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
@@ -49,29 +51,29 @@ function EndOfRoundComponent() {
       case "KILL":
         return (
           <Grid item container justifyContent="center" spacing={3}>
-            <ColouredGrid item themes={theme}>
+            <StyledGrid>
               <Typography>{loserName} looses a dice</Typography>
-            </ColouredGrid>
-            <ColouredGrid item themes={theme}>
+            </StyledGrid>
+            <StyledGrid>
               <FontAwesomeIcon icon={faDice} />
-            </ColouredGrid>
-            <ColouredGrid item themes={theme}>
+            </StyledGrid>
+            <StyledGrid>
               <FontAwesomeIcon icon={faArrowDown} />
-            </ColouredGrid>
+            </StyledGrid>
           </Grid>
         );
       case "SPOT ON":
         return (
           <Grid item container justifyContent="center" spacing={3}>
-            <ColouredGrid item themes={theme}>
+            <StyledGrid>
               <Typography>{winnerName} wins a dice</Typography>
-            </ColouredGrid>
-            <ColouredGrid item themes={theme}>
+            </StyledGrid>
+            <StyledGrid>
               <FontAwesomeIcon icon={faDice} />
-            </ColouredGrid>
-            <ColouredGrid item themes={theme}>
+            </StyledGrid>
+            <StyledGrid>
               <FontAwesomeIcon icon={faArrowUp} />
-            </ColouredGrid>
+            </StyledGrid>
           </Grid>
         );
       default:
@@ -82,7 +84,7 @@ function EndOfRoundComponent() {
   return (
     <React.Fragment>
       <StyledContainer>
-        <StyledGrid container>
+        <CenteredGrid container>
           <Grid item xs={12} sm={10} md={8}>
             <StyledPaper elevation={1} style={{backgroundColor: theme.colors.background }}>
               {endOfGame ? (
@@ -105,16 +107,16 @@ function EndOfRoundComponent() {
                 spacing={5}
                 className="EndOfRoundContainer"
               >
-                <ColouredGrid item themes={theme}>
+                <StyledGrid>
                   <Typography variant="h5">{requesterName} bidded: </Typography>
-                </ColouredGrid>
+                </StyledGrid>
                 <Grid item>
                   <StyledPaper elevation={2} style={{backgroundColor: theme.colors.paper2 }}>
                     <Grid container item>
                       <Grid container item direction="column" xs={6}>
-                        <ColouredGrid item themes={theme}>
+                        <StyledGrid>
                           {action}
-                        </ColouredGrid>
+                        </StyledGrid>
                         {currentBid ? (
                           <StyledDieAction
                             container
@@ -122,24 +124,24 @@ function EndOfRoundComponent() {
                             justifyContent="center"
                             spacing={2}
                           >
-                            <ColouredGrid item themes={theme}>
+                            <StyledGrid>
                               {valueToDiceIcon(currentBid.diceValue)}
-                            </ColouredGrid>
-                            <ColouredGrid item themes={theme}>
+                            </StyledGrid>
+                            <StyledGrid>
                               <FontAwesomeIcon icon={faTimes} />
-                              </ColouredGrid>
-                            <ColouredGrid item themes={theme}>
+                            </StyledGrid>
+                            <StyledGrid>
                               {currentBid.diceNumber}
-                            </ColouredGrid>
+                            </StyledGrid>
                           </StyledDieAction>
                         ) : (
                           ""
                         )}
                       </Grid>
                       <Grid container item direction="column" xs={6}>
-                        <ColouredGrid item themes={theme}>
+                        <StyledGrid>
                           There were
-                        </ColouredGrid>
+                        </StyledGrid>
                         {currentBid ? (
                           <StyledDieAction
                             container
@@ -147,15 +149,15 @@ function EndOfRoundComponent() {
                             justifyContent="center"
                             spacing={2}
                           >
-                            <ColouredGrid item themes={theme}>
+                            <StyledGrid>
                               {valueToDiceIcon(currentBid.diceValue)}
-                            </ColouredGrid>
-                            <ColouredGrid item themes={theme}>
+                            </StyledGrid>
+                            <StyledGrid>
                               <FontAwesomeIcon icon={faTimes} />
-                            </ColouredGrid>
-                            <ColouredGrid item themes={theme}>
+                            </StyledGrid>
+                            <StyledGrid>
                               {totalBidDieNumber}
-                            </ColouredGrid>
+                            </StyledGrid>
                           </StyledDieAction>
                         ) : (
                           ""
@@ -182,7 +184,7 @@ function EndOfRoundComponent() {
               </Grid>
             </StyledPaper>
           </Grid>
-        </StyledGrid>
+        </CenteredGrid>
       </StyledContainer>
     </React.Fragment>
   );
@@ -195,14 +197,8 @@ const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;
 `;
-const StyledGrid = styled(Grid)`
-  justify-content: center;
-`;
 const StyledDieAction = styled(Grid)`
   font-size: 2rem;
 `;
-const ColouredGrid = styled(Grid)`
-color: ${(props) => props.themes.colors.text};
-`
 
 export default EndOfRoundComponent;

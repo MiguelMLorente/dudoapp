@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { WebSocketContext } from "../WebSocket";
+import StyledGrid from "./StyledComponents/StyledGrid";
 
 function PlayerNameComponent(props) {
   const ws = useContext(WebSocketContext);
@@ -32,9 +33,9 @@ function PlayerNameComponent(props) {
   return (
     <Paper elevation={2} style={{backgroundColor: props.isReady ? theme.colors.name: theme.colors.textBackground }}>
       <Grid container justifyContent="space-between">
-        <ColouredGrid item themes={theme}>
+        <StyledGrid>
           <StyledTypography variant="h4">{props.name}</StyledTypography>
-        </ColouredGrid>
+        </StyledGrid>
         {isAdmin ? kickDisplay() : ""}
       </Grid>
     </Paper>
@@ -50,7 +51,4 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
 const StyledTypography = styled(Typography)`
   padding-left: 1rem;
 `;
-const ColouredGrid = styled(Grid)`
-  color: ${(props) => props.themes.colors.text};
-`
 export default PlayerNameComponent;

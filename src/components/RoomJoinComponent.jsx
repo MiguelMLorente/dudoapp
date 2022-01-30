@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { WebSocketContext } from "../WebSocket";
 import { updateUserName } from "../actions/gameDataActions";
 import { changeToNewRoom, updateKickStatus } from "../actions/appStatusActions";
+import CenteredGrid from "./StyledComponents/CenteredGrid";
 
 function RoomJoinComponent() {
   const ws = useContext(WebSocketContext);
@@ -124,7 +125,7 @@ function RoomJoinComponent() {
             </Button>
           </DialogActions>
         </Dialog>
-        <StyledGrid container>
+        <CenteredGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
             <Paper style={{padding: "2rem", backgroundColor: theme.colors.background}}>
               <LogoComponent />
@@ -185,7 +186,7 @@ function RoomJoinComponent() {
               </Grid>
             </Paper>
           </Grid>
-        </StyledGrid>
+        </CenteredGrid>
       </StyledContainer>
     </React.Fragment>
   );
@@ -193,8 +194,5 @@ function RoomJoinComponent() {
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;
-`;
-const StyledGrid = styled(Grid)`
-  justify-content: center;
 `;
 export default RoomJoinComponent;
