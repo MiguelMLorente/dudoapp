@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { Button, Grid, Paper, Typography, Divider } from "@mui/material";
+import { Button, Grid, Typography, Divider } from "@mui/material";
 import LogoComponent from "./LogoComponent";
 import PlayerNameComponent from "./PlayerNameComponent";
 import { useSelector } from "react-redux";
 import { WebSocketContext } from "../WebSocket";
 import CenteredGrid from "./StyledComponents/CenteredGrid";
 import StyledGrid from "./StyledComponents/StyledGrid";
+import StyledPaper from "./StyledComponents/StyledPaper";
 
 function LobbyComponent() {
   const ws = useContext(WebSocketContext);
@@ -27,7 +28,7 @@ function LobbyComponent() {
       <StyledContainer>
         <CenteredGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
-            <Paper style={{padding: "2rem", backgroundColor: theme.colors.background}}>
+            <StyledPaper color={"background"} padding={"big"}>
               <LogoComponent variant="small" />
               <Grid
                 container
@@ -88,7 +89,7 @@ function LobbyComponent() {
                   </Button>
                 </Grid>
               </Grid>
-            </Paper>
+            </StyledPaper>
           </Grid>
         </CenteredGrid>
       </StyledContainer>

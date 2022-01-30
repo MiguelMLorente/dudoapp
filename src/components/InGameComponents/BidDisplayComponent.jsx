@@ -1,18 +1,14 @@
 import React from "react";
-import { Grid, Paper } from "@mui/material";
-import { styled } from "@mui/system";
+import { Grid } from "@mui/material";
 import { valueToDiceIcon } from "./utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
 import StyledGrid from "../StyledComponents/StyledGrid";
+import StyledPaper from "../StyledComponents/StyledPaper";
 
 function BidDisplayComponent(props) {
-  
-  let theme = useSelector((state) => state.theme);
-
   return (
-    <StyledPaper elevation={2} style={{ backgroundColor: theme.colors.paper2 }}>
+    <StyledPaper elevate={2} color={"paper2"} radius={"big"}>
       <StyledGrid>
         <Grid container justifyContent="space-around" direction="row">
           <Grid item>
@@ -32,9 +28,4 @@ function BidDisplayComponent(props) {
     </StyledPaper>
   );
 }
-
-const StyledPaper = styled(Paper)`
-  font-size: 1.5rem;
-  border-radius: 6px;
-`;
 export default BidDisplayComponent;

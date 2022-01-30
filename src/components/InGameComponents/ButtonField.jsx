@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Button, Grid, Paper } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import styled from "styled-components";
 import DiceSelector from "./DiceSelector";
 import { useSelector } from "react-redux";
 import { WebSocketContext } from "../../WebSocket";
+import StyledPaper from "../StyledComponents/StyledPaper";
 
 function ButtonField() {
   const ws = useContext(WebSocketContext);
@@ -25,10 +26,10 @@ function ButtonField() {
     );
   };
   return (
-    <StyledPaper elevation={3} style={{backgroundColor: theme.colors.paper}}>
+    <StyledPaper padding={"big"} elevate={3} color={"paper"}>
       <Grid container justifyContent="center">
         <Grid container item justifyContent="space-around">
-          <Paper elevation={1} style={{backgroundColor: theme.colors.paper2, padding: "1rem"}}>
+          <StyledPaper elevate={3} color={"paper2"} padding={"small"}>
             <Grid container wrap="nowrap">
               <StyledButtonGrid item>
                 <Button variant="contained" onClick={handleBid} style={{backgroundColor: theme.colors.buttonField, color: theme.colors.text}} >
@@ -39,7 +40,7 @@ function ButtonField() {
                 <DiceSelector />
               </Grid>
             </Grid>
-          </Paper>
+          </StyledPaper>
         </Grid>
         <StyledButtonGrid container item justifyContent="space-around" spacing={0}>
           <Grid item>
@@ -80,14 +81,8 @@ function ButtonField() {
     </StyledPaper>
   );
 }
-const StyledPaper = styled(Paper)`
-  padding: 2rem;
-  button {
-    margin: 0.6rem;
-  }
-`;
 const StyledButtonGrid = styled(Grid)`
-  padding-top: 1.6rem;
-  margin-left: 0.4rem;
+  padding-top: 2.5rem;
+  margin-left: 0.8rem !important;
 `;
 export default ButtonField;

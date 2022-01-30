@@ -43,7 +43,18 @@ const lightTheme = {
   buttonField: "#ffffff",
 };
 
-let size = { windowHeight: window.innerHeight };
+let size = {
+  windowHeight: window.innerHeight,
+  fontSize: "1.5rem",
+  paddings: {
+    big: "2rem",
+    stretched: "0.5rem 2.5rem 0.5rem 2.5rem",
+    small: "1rem",
+  },
+  borderRads: {
+    big: "6px",
+  },
+};
 
 const initState = { colors: darkTheme, sizes: size };
 

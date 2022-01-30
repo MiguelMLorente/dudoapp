@@ -4,7 +4,6 @@ import {
   TextField,
   Grid,
   Button,
-  Paper,
   Dialog,
   DialogContentText,
   DialogContent,
@@ -16,6 +15,7 @@ import { WebSocketContext } from "../WebSocket";
 import { updateUserName } from "../actions/gameDataActions";
 import { changeToNewRoom, updateKickStatus } from "../actions/appStatusActions";
 import CenteredGrid from "./StyledComponents/CenteredGrid";
+import StyledPaper from "./StyledComponents/StyledPaper";
 
 function RoomJoinComponent() {
   const ws = useContext(WebSocketContext);
@@ -127,7 +127,7 @@ function RoomJoinComponent() {
         </Dialog>
         <CenteredGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
-            <Paper style={{padding: "2rem", backgroundColor: theme.colors.background}}>
+            <StyledPaper color={"background"} padding={"big"} >
               <LogoComponent />
               <Grid
                 container
@@ -184,7 +184,7 @@ function RoomJoinComponent() {
                   </Button>
                 </Grid>
               </Grid>
-            </Paper>
+            </StyledPaper>
           </Grid>
         </CenteredGrid>
       </StyledContainer>

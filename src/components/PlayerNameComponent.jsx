@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { WebSocketContext } from "../WebSocket";
 import StyledGrid from "./StyledComponents/StyledGrid";
+import StyledPaper from "./StyledComponents/StyledPaper";
 
 function PlayerNameComponent(props) {
   const ws = useContext(WebSocketContext);
@@ -13,7 +14,6 @@ function PlayerNameComponent(props) {
   const userUuid = useSelector((state) => state.gameData.userId);
   const gameUuid = useSelector((state) => state.gameData.gameId);
   let isAdmin = useSelector((state) => state.gameData.isAdmin);
-  let theme = useSelector((state) => state.theme);
 
   const kickHandler = () => {
     ws.sendKickRequest(userUuid, gameUuid, props.name);
@@ -31,14 +31,14 @@ function PlayerNameComponent(props) {
     }
   };
   return (
-    <Paper elevation={2} style={{backgroundColor: props.isReady ? theme.colors.name: theme.colors.textBackground }}>
+    <StyledPaper elevate={2} color={props.isReady ? "name": "textBackground"}>
       <Grid container justifyContent="space-between">
         <StyledGrid>
           <StyledTypography variant="h4">{props.name}</StyledTypography>
         </StyledGrid>
         {isAdmin ? kickDisplay() : ""}
       </Grid>
-    </Paper>
+    </StyledPaper>
   );
 }
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`

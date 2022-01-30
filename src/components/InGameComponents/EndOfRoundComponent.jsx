@@ -6,7 +6,6 @@ import {
   DialogTitle,
   Divider,
   Grid,
-  Paper,
   Typography,
 } from "@mui/material";
 import styled from "styled-components";
@@ -23,6 +22,7 @@ import {
 import SpecialRoundComponent from "./SpecialRoundComponent";
 import CenteredGrid from "../StyledComponents/CenteredGrid";
 import StyledGrid from "../StyledComponents/StyledGrid";
+import StyledPaper from "../StyledComponents/StyledPaper";
 
 function EndOfRoundComponent() {
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
@@ -33,7 +33,6 @@ function EndOfRoundComponent() {
   let currentBid = useSelector((state) => state.gameStatus.currentBid);
   let endOfGame = useSelector((state) => state.gameStatus.endOfGame);
   let totalBidDieNumber = 0;
-  let theme = useSelector((state) => state.theme);
 
   playersInfo.forEach((player) => {
     if (player.diceValue && currentBid) {
@@ -86,7 +85,7 @@ function EndOfRoundComponent() {
       <StyledContainer>
         <CenteredGrid container>
           <Grid item xs={12} sm={10} md={8}>
-            <StyledPaper elevation={1} style={{backgroundColor: theme.colors.background }}>
+            <StyledPaper elevate={1} color={"background"} padding={"big"}>
               {endOfGame ? (
                 <Dialog open={endOfGame}>
                   <DialogTitle>{endOfGame.winner} won!</DialogTitle>
@@ -111,7 +110,7 @@ function EndOfRoundComponent() {
                   <Typography variant="h5">{requesterName} bidded: </Typography>
                 </StyledGrid>
                 <Grid item>
-                  <StyledPaper elevation={2} style={{backgroundColor: theme.colors.paper2 }}>
+                  <StyledPaper elevation={2} color={"paper2"} padding={"big"}>
                     <Grid container item>
                       <Grid container item direction="column" xs={6}>
                         <StyledGrid>
@@ -189,10 +188,6 @@ function EndOfRoundComponent() {
     </React.Fragment>
   );
 }
-
-const StyledPaper = styled(Paper)`
-  padding: 2rem;
-`;
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;
@@ -200,5 +195,4 @@ const StyledContainer = styled.div`
 const StyledDieAction = styled(Grid)`
   font-size: 2rem;
 `;
-
 export default EndOfRoundComponent;

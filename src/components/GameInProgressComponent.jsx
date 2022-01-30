@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { Grid, Paper, Typography, Divider } from "@mui/material";
+import { Grid, Typography, Divider } from "@mui/material";
 import LogoComponent from "./LogoComponent";
 import BidDisplayComponent from "./InGameComponents/BidDisplayComponent";
 import DiceDisplayComponent from "./InGameComponents/DiceDisplayComponent";
 import ButtonField from "./InGameComponents/ButtonField";
 import StyledGrid from "./StyledComponents/StyledGrid"
+import StyledPaper from "./StyledComponents/StyledPaper";
 
 function GameInProgressComponent() {
   const userName = useSelector((state) => state.gameData.name);
   let currentBid = useSelector((state) => state.gameStatus.currentBid);
   let playersInfo = useSelector((state) => state.gameStatus.playersInfo);
-  let theme = useSelector((state) => state.theme);
 
   let [selfInfo, setSelfInfo] = useState(
     playersInfo
@@ -62,7 +62,7 @@ function GameInProgressComponent() {
       <StyledContainer>
         <Grid container justifyContent="center">
           <Grid item s={12} sm={10} md={8} lg={6}>
-            <StyledPaper elevation={1} style={{backgroundColor: theme.colors.background}}>
+            <StyledPaper elevate={1} color={"background"} padding={"big"} radius={"big"}>
               <LogoComponent variant="small" />
               <Grid
                 container
@@ -103,7 +103,7 @@ function GameInProgressComponent() {
                 )}
                 <StyledGrid>
                   Now Playing:
-                  <StyledPaper elevation={2} style={{backgroundColor: theme.colors.paper2}}>
+                  <StyledPaper elevate={2} color={"paper2"} radius={"big"}>
                     <StyledGrid container justifyContent="space-around">
                       <Grid item>{activePlayer.playerName}</Grid>
                     </StyledGrid>
@@ -151,11 +151,6 @@ function GameInProgressComponent() {
     </React.Fragment>
   );
 }
-const StyledPaper = styled(Paper)`
-  padding: 2rem;
-  font-size: 1.5rem;
-  border-radius: 6px;
-`;
 const StyledContainer = styled.div`
   padding: 2rem;
   margin-top: 10vh;

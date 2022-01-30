@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { TextField, Grid, Button, Paper } from "@mui/material";
+import { TextField, Grid, Button } from "@mui/material";
 import LogoComponent from "./LogoComponent";
 import { changeToJoinRoom } from "../actions/appStatusActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import {
   updateUserName,
 } from "../actions/gameDataActions";
 import CenteredGrid from "./StyledComponents/CenteredGrid";
+import StyledPaper from "./StyledComponents/StyledPaper";
 
 function NewRoomComponent() {
   const ws = useContext(WebSocketContext);
@@ -41,7 +42,7 @@ function NewRoomComponent() {
       <StyledContainer>
         <CenteredGrid container>
           <Grid item s={12} sm={10} md={8} lg={6}>
-            <Paper style={{padding: "2rem", backgroundColor: theme.colors.background }}>
+            <StyledPaper color={"background"} padding={"big"}>
               <LogoComponent />
               <Grid
                 container
@@ -92,7 +93,7 @@ function NewRoomComponent() {
                   </Button>
                 </Grid>
               </Grid>
-            </Paper>
+            </StyledPaper>
           </Grid>
         </CenteredGrid>
       </StyledContainer>

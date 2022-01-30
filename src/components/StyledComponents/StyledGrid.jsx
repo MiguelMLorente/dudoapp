@@ -11,6 +11,6 @@ const StyledGrid = ({ children }) => {
   );
 }
 const TextColouredGrid = styled(Grid)`
-  color: ${(props) => props.themes.colors.text};
+  color: ${(props) => props.themes.colors["text"]};
 `
 export default StyledGrid;
